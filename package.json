@@ -1,0 +1,24 @@
+{
+  "name": "courseninja",
+  "version": "1.0.0",
+  "description": "INFO 5054 Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RachelVoisin/CourseNinja.git"
+  },
+  "author": "Rachel Voisin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RachelVoisin/CourseNinja/issues"
+  },
+  "homepage": "https://github.com/RachelVoisin/CourseNinja#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
