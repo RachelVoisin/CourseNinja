@@ -3,7 +3,9 @@
 var express = require("express");
 var app = express();
 
-var bodyParser = require("body-parser");
+var bodyParser = require("body-parser"),
+	passport = require("passport"),
+	LocalStrategy = require("passport-local");
 
 const PORT = process.env.PORT || 3000
 
