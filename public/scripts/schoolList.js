@@ -1,0 +1,1 @@
+var schoolList = ["Fanshawe College", "Western University", "Conestoga College", "Wilfrid Laurier University", "University of Waterloo", "Guelph University", "McMaster University", "George Brown College", "Humber College", "Sheridan College", "Seneca College", "University of Toronto", "York University", "Algonquin College", "University of Ottawa"];
