@@ -20,11 +20,10 @@ app.use(session({
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "ninyaninya",
-  database : "auth"
+  user: "ninjamaster",
+  password: "Ninya123!",
+  database: "courseninja"
 });
-// change that to proper db once source sql has been run
 
 con.connect(function(err) {
   if (err) throw err;
@@ -46,15 +45,18 @@ app.get("/", function(req, res){
 app.post('/login', function(req, res){
     var name= req.body.username;
     var pass= req.body.password;
-    var sql="SELECT id, user_name FROM users WHERE user_name = '" + name + "' and password = '" + pass + "'";  
+    var sql="SELECT userId, username FROM users WHERE username = '" + name + "' and userPassword = '" + pass + "'";  
 	
-    con.query(sql, function(err, results){      
-         if(results.length){
-            req.session.userId = results[0].id;
-            req.session.username = results[0].user_name;
+    con.query(sql, function(err, results){
+		if(err){
+			req.session.message = "Database could not be reached";
+			res.redirect('/');
+		} else if(results.length){
+            req.session.userId = results[0].userId;
+            req.session.username = results[0].username;
             res.redirect('/');
 		} else {
-			sql = "SELECT user_name FROM users WHERE user_name = '" + name + "';";
+			sql = "SELECT username FROM users WHERE username = '" + name + "';";
 			con.query(sql, function(err, results){ 
 				if(results.length){
 					req.session.message = "Incorrect password. Please try again."
@@ -90,7 +92,7 @@ app.post("/register", function(req, res){
 	var pass2 = req.body.password2;
 	// validate and/or escape values
 	if(pass === pass2){
-		var sql="INSERT INTO users (user_name, password) VALUES ('" + name + "','" + pass + "');";  
+		var sql="INSERT INTO users (username, userPassword) VALUES ('" + name + "','" + pass + "');";  
 		con.query(sql, function(err, results){      
 			if(err){
 				req.session.message = "Database could not be reached";
