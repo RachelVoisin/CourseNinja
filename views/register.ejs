@@ -1,0 +1,13 @@
+<% include ./partials/header %>
+
+<h1>Create An Account</h1>
+<form action="/register" method="POST">
+	<input type="text" name="email" placeholder="Email" />
+	<input type="text" name="username" placeholder="Username" />
+	<input type="text" name="password" placeholder="Password" />
+	<input type="text" name="password2" placeholder="Repeat Password" />
+	<br />
+	<input type="submit" value="Submit" />
+</form>
+
+<% include ./partials/footer %>

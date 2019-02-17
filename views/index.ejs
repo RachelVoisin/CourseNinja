@@ -2,9 +2,16 @@
 
 <h1>Find Your School</h1>
 <form>
-	<input type="text" name="school" placeholder="Your School Name" />
+	<input id="schoolInput" type="text" name="school" placeholder="Your School Name" />
 	<br />
 	<input type="submit" value="Submit" />
 </form>
+
+<script src="/scripts/autocomplete.js"></script>
+<script src="/scripts/schoolList.js"></script>
+
+<script>
+	autocomplete(document.getElementById("schoolInput"), schoolList);
+</script>
 
 <% include ./partials/footer %>
