@@ -1,17 +1,35 @@
 <% include ./partials/header %>
 
 <h1>Find Your School</h1>
-<form>
-	<input id="schoolInput" type="text" name="school" placeholder="Your School Name" />
-	<br />
-	<input type="submit" value="Submit" />
-</form>
+<div class="indexWrapper">
+	<form action="/programs" method="GET" autocomplete="off">
+		<div id="schoolForm" class="form schoolForm">
+			<input id="schoolInput" type="text" name="school" placeholder="Your School Name" />
+			<br />
+			<input type="button" value="Next" onclick="next()" />
+		</div>
+		<div id="programForm" class="form programForm">
+			<input id="programInput" type="text" name="program" placeholder="program name" />
+			<br />
+			<input type="submit" value="Submit" />
+		</div>
+	</form>
+</div>
 
 <script src="/scripts/autocomplete.js"></script>
 <script src="/scripts/schoolList.js"></script>
-
+<script src="/scripts/programList.js"></script>
 <script>
 	autocomplete(document.getElementById("schoolInput"), schoolList);
+
+	function next() {
+		document.getElementById("schoolForm").style.left = "-800px";
+		document.getElementById("programForm").style.right = "0";
+		
+		var school = document.getElementById("schoolInput").value;
+		var school = school.replace(" ", "_");
+		autocomplete(document.getElementById("programInput"), programList[school]);
+	}
 </script>
 
 <% include ./partials/footer %>
