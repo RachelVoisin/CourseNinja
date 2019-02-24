@@ -43,9 +43,9 @@ app.get("/", function(req, res){
 });
 
 app.post('/login', function(req, res){
-    var name= req.body.username;
-    var pass= req.body.password;
-    var sql="SELECT userId, username FROM users WHERE username = '" + name + "' and userPassword = '" + pass + "'";  
+    var name = req.body.username;
+    var pass = req.body.password;
+    var sql = "SELECT userId, username FROM users WHERE username = '" + name + "' and userPassword = '" + pass + "'";  
 	
     con.query(sql, function(err, results){
 		if(err){
@@ -91,6 +91,7 @@ app.post("/register", function(req, res){
     var pass = req.body.password;
 	var pass2 = req.body.password2;
 	// validate and/or escape values
+	// do something to ensure usernames are unique
 	if(pass === pass2){
 		var sql="INSERT INTO users (username, userPassword) VALUES ('" + name + "','" + pass + "');";  
 		con.query(sql, function(err, results){      
@@ -111,6 +112,18 @@ app.post("/register", function(req, res){
 app.get("/admin", isLoggedIn, function(req, res){
 	res.send("You passed the test!");
 });
+
+app.get("/programs", function(req, res){
+	var school = req.query.school;
+	var program = req.query.program;
+	if(school != undefined){
+		res.send("display program" + school + program);
+	} else {
+		res.redirect("/");
+	}
+});
+
+// add route for redirecting anything else 
 
 function isLoggedIn(req, res, next){
 	if(req.session.username){
