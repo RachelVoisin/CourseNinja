@@ -175,6 +175,21 @@ app.get("/reviews", function(req, res){
 	});
 });
 
+app.post("/reviews", function(req, res){
+	var review = req.body.newReview;
+	var rating= req.body.rating;
+
+	var sql = "INSERT INTO reviews (reviewBody, rating) VALUES ('" + review + "','" + rating + "');"
+	con.query(sql, function(err, results){
+		if(err){
+			console.log(err);
+		} else {
+			console.log(sql);
+		}
+	});
+	res.redirect('reviews');
+});
+
 function isLoggedIn(req, res, next){
 	if(req.session.username){
 		next();
