@@ -114,14 +114,67 @@ app.get("/admin", isLoggedIn, function(req, res){
 });
 
 app.get("/programs", function(req, res){
+	// temporary for displaying review page because there is nothing in the database
+	var reviews =[];
+	var sql = "SELECT reviewBody, rating FROM reviews;";
+	con.query(sql, function(err, results){
+		if(err){
+			req.session.message = 'Error getting reviews';
+		} else {
+			results.forEach(function(el, index) {
+				reviews.push(el);
+			});
+		}
+		res.render("reviews" ,{reviews: reviews});
+	});
+});
+
+app.get("/reviews", function(req, res){
 	var school = req.query.school;
 	var program = req.query.program;
-	if(school != undefined){
-		res.send("display program" + school + program);
-	} else {
-		res.redirect("/");
-	}
+	var reviews = [];
+	var sql = "SELECT schoolId FROM schools WHERE schoolName = '" + school + "';";
+	con.query(sql, function(err, results){
+		if(err){
+			req.session.message = 'Database could not be reached: ' + err;
+			res.redirect('/');
+		} else if(results.length){
+			var schoolId = results[0].schoolId;
+			var sql = "SELECT programId FROM programs WHERE schoolId = " + schoolId + "AND programName = '" + program + "';";
+			con.query(sql, function(err, results){
+				if(err){
+					req.session.message = 'Database could not be reached: '+ err;
+					res.redirect('/');
+				} else if(results.length){
+					var sql = "SELECT reviewBody, rating FROM reviews WHERE programId = " + results[0].programId + ";";
+					con.query(sql, function(err, results){
+						if(err){
+							req.session.message = 'Database could not be reached: ' + err;
+							res.redirect('/');
+						} else if(results.length){
+							results.forEach(function(el, index) {
+								reviews.push(el);
+								res.render("reviews", {reviews: reviews});
+							});
+						} else {
+							req.session.message = 'Be the first to leave a review!';
+							res.render("reviews", {reviews: reviews});
+						}
+					});
+				} else {
+					req.session.message = 'Could not find program with that name';
+					// redirect to program list?
+					res.redirect('/');
+				}
+			});
+		} else {
+			req.session.message = 'Could not find school with that name';
+			// redirect to school list?
+			res.redirect('/');
+		}
+	});
 });
+
 
 // add route for redirecting anything else 
 
