@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + "/public")); 
+app.use(express.static(__dirname + "/public"));
 app.use(session({
 	secret: 'wouldrathernot',
 	resave: true,
@@ -30,7 +30,7 @@ con.connect(function(err) {
   console.log("Connected to Database!");
 });
 
-//middleware used on every route call 
+//middleware used on every route call
 app.use(function(req, res, next){
 	res.locals.user = req.session.username;
 	res.locals.message = req.session.message;
@@ -45,8 +45,8 @@ app.get("/", function(req, res){
 app.post('/login', function(req, res){
     var name = req.body.username;
     var pass = req.body.password;
-    var sql = "SELECT userId, username FROM users WHERE username = '" + name + "' and userPassword = '" + pass + "'";  
-	
+    var sql = "SELECT userId, username FROM users WHERE username = '" + name + "' and userPassword = '" + pass + "'";
+
     con.query(sql, function(err, results){
 		if(err){
 			req.session.message = "Database could not be reached";
@@ -57,7 +57,7 @@ app.post('/login', function(req, res){
             res.redirect('/');
 		} else {
 			sql = "SELECT username FROM users WHERE username = '" + name + "';";
-			con.query(sql, function(err, results){ 
+			con.query(sql, function(err, results){
 				if(results.length){
 					req.session.message = "Incorrect password. Please try again."
 					res.redirect("/");
@@ -65,7 +65,7 @@ app.post('/login', function(req, res){
 					req.session.message = "Username not found. Please try again."
 					res.redirect("/");
 				}
-			});			
+			});
 		}
 	});
 });
@@ -93,8 +93,8 @@ app.post("/register", function(req, res){
 	// validate and/or escape values
 	// do something to ensure usernames are unique
 	if(pass === pass2){
-		var sql="INSERT INTO users (username, userPassword) VALUES ('" + name + "','" + pass + "');";  
-		con.query(sql, function(err, results){      
+		var sql="INSERT INTO users (username, userPassword) VALUES ('" + name + "','" + pass + "');";
+		con.query(sql, function(err, results){
 			if(err){
 				req.session.message = "Database could not be reached";
 				res.redirect('/register');
@@ -174,9 +174,6 @@ app.get("/reviews", function(req, res){
 		}
 	});
 });
-
-
-// add route for redirecting anything else 
 
 function isLoggedIn(req, res, next){
 	if(req.session.username){
