@@ -23,10 +23,10 @@ CREATE TABLE programs (
 	programName VARCHAR(255),
 	schoolId INT(8),
 	programLength VARCHAR(255),
-	tuitionDomestic DECIMAL(5, 2),
-	tutionInternational DECIMAL(5, 2),
+	tuitionDomestic DECIMAL(7, 2),
+	tutionInternational DECIMAL(7, 2),
 	isCoOp TINYINT(1),
-	overallRating DECIMAL (2, 1),
+	overallRating DECIMAL (2, 0),
 	degreeType VARCHAR(255),
 	
 	FOREIGN KEY (schoolId)
