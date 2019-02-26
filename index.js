@@ -187,7 +187,7 @@ app.post("/reviews", function(req, res){
 			console.log(sql);
 		}
 	});
-	res.redirect('reviews');
+	res.redirect('programs');
 });
 
 function isLoggedIn(req, res, next){

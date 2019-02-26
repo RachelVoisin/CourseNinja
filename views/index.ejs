@@ -1,19 +1,21 @@
 <% include ./partials/header %>
 
-<h1>Find Your School</h1>
-<div class="indexWrapper">
-	<form action="/programs" method="GET" autocomplete="off">
-		<div id="schoolForm" class="form schoolForm">
-			<input id="schoolInput" type="text" name="school" placeholder="Your School Name" />
-			<br />
-			<input type="button" value="Next" onclick="next()" />
-		</div>
-		<div id="programForm" class="form programForm">
-			<input id="programInput" type="text" name="program" placeholder="program name" />
-			<br />
-			<input type="submit" value="Submit" />
-		</div>
-	</form>
+<div class="index">
+	<h1>Find Your School</h1>
+	<div class="indexWrapper">
+		<form action="/programs" method="GET" autocomplete="off">
+			<div id="schoolForm" class="form schoolForm">
+				<input id="schoolInput" type="text" name="school" placeholder="Your School Name" />
+				<br />
+				<input type="button" value="Next" onclick="next()" />
+			</div>
+			<div id="programForm" class="form programForm">
+				<input id="programInput" type="text" name="program" placeholder="program name" />
+				<br />
+				<input type="submit" value="Submit" />
+			</div>
+		</form>
+	</div>
 </div>
 
 <script src="/scripts/autocomplete.js"></script>
