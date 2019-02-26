@@ -1,0 +1,171 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>admin</title>
+    <style>
+        body{
+            background-color: peachpuff;
+        }
+
+        input {
+            border-style: solid;
+            border-color: black;
+        }
+
+        form {
+            padding: 5px; 
+            border: 3px solid black;
+            color: maroon;
+        }
+
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/CourseAdmin.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#btnNew").click(function () {
+                document.getElementById('txtprogramId').value = "";
+                document.getElementById('txtprogramCode').value = "";
+                document.getElementById('txtprogramName').value = "";
+               // document.getElementById('txtschoolId').value = "";
+                document.getElementById('txtprogramLength').value = "";
+                document.getElementById('txttuitionDomestic').value = "";
+                document.getElementById('txttutionInternational').value = "";
+                document.getElementById('txtisCoOp').value = "";
+                document.getElementById('txtoverallRating').value = "";
+                document.getElementById('txtdegreeType').value = "";
+
+            });
+
+            $("#btnAdd").click(function () {
+                $.post("/insert", {
+                    //post to server
+                    programId: document.getElementById('txtprogramId').value,
+                    programCode: document.getElementById('txtprogramCode').value,
+                    programName: document.getElementById('txtprogramName').value,
+                    //schoolId: document.getElementById('txtschoolId').value,
+                    programLength: document.getElementById('txtprogramLength').value,
+                    tuitionDomestic: document.getElementById('txttuitionDomestic').value,
+                    tutionInternationalCode: document.getElementById('txttutionInternational').value,
+                    isCoOp: document.getElementById('txtisCoOp').value,
+                    overallRating: document.getElementById('txtoverallRating').value,
+                    degreeType: document.getElementById('txtdegreeType').value 
+                },
+                    function (data, status) {
+                        document.getElementById("SuccessMessage").innerHTML = "Add Successful" + "<br>";
+
+                    });
+            });
+
+            $("#btnUpdate").click(function () {
+                $.post("/update", {
+                    //post to server
+                    programId: document.getElementById('txtprogramId').value,
+                    programCode: document.getElementById('txtprogramCode').value,
+                    programName: document.getElementById('txtprogramName').value,
+                   // schoolId: document.getElementById('txtschoolId').value,
+                    programLength: document.getElementById('txtprogramLength').value,
+                    tuitionDomestic: document.getElementById('txttuitionDomestic').value,
+                    tutionInternationalCode: document.getElementById('txttutionInternational').value,
+                    isCoOp: document.getElementById('txtisCoOp').value,
+                    overallRating: document.getElementById('txtoverallRating').value,
+                    degreeType: document.getElementById('txtdegreeType').value 
+
+                },
+                    //callback return status message
+                    function (data, status) {
+                        document.getElementById("SuccessMessage").innerHTML = "Update Successful" + "<br>";
+
+                        document.getElementById('txtprogramId').value = "";
+                        document.getElementById('txtprogramCode').value = "";
+                        document.getElementById('txtprogramName').value = "";
+                      //  document.getElementById('txtschoolId').value = "";
+                        document.getElementById('txtprogramLength').value = "";
+                        document.getElementById('txttuitionDomestic').value = "";
+                        document.getElementById('txttutionInternational').value = "";
+                        document.getElementById('txtisCoOp').value = "";
+                        document.getElementById('txtoverallRating').value = "";
+                        document.getElementById('txtdegreeType').value = "";
+                    });
+
+            });
+
+            $("#btnDelete").click(function () {
+                $.post("/delete", {
+                    //post to server
+                    programId: document.getElementById('txtprogramId').value
+
+
+                },
+                    function (data, status) {
+                        document.getElementById("SuccessMessage").innerHTML = "Delete Successful" + "<br>";
+
+                        document.getElementById('txtprogramId').value = "";
+                        document.getElementById('txtprogramCode').value = "";
+                        document.getElementById('txtprogramName').value = "";
+                      //  document.getElementById('txtschoolId').value = "";
+                        document.getElementById('txtprogramLength').value = "";
+                        document.getElementById('txttuitionDomestic').value = "";
+                        document.getElementById('txttutionInternational').value = "";
+                        document.getElementById('txtisCoOp').value = "";
+                     document.getElementById('txtoverallRating').value = "";
+                        document.getElementById('txtdegreeType').value = "";
+                    });
+
+            });
+
+            $("#btnFind").click(function () {
+                $.post("/find", {
+                    //post to server
+                    programId: document.getElementById('txtprogramId').value
+
+
+                },
+                    function (data, status) {
+                        document.getElementById("SuccessMessage").innerHTML = "Contact Successfully Found" + "<br>";
+
+
+                        document.getElementById('txtprogramCode').value = tableData.recordset[0].programCode;
+                        document.getElementById('txtprogramName').value = tableData.recordset[0].programName;
+                     //   document.getElementById('txtschoolId').value = tableData.recordset[0].schoolId;
+                        document.getElementById('txtprogramLength').value = tableData.recordset[0].programLength;
+                        document.getElementById('txttuitionDomestic').value = tableData.recordset[0].tuitionDomestic;
+                        document.getElementById('txttutionInternational').value = tableData.recordset[0].tutionInternationalCode;
+                        document.getElementById('txtisCoOp').value = tableData.recordset[0].isCoOp;
+                        document.getElementById('txtoverallRating').value = tableData.recordset[0].overallRating;
+                        document.getElementById('txtdegreeType').value = tableData.recordset[0].degreeType;
+                    });
+
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+    <form>
+        <label>program Number:</label> <input type="text" name="txtprogramId" id="txtprogramId"><br><br>
+        <label>programCode :</label> <input type="text" name="txtprogramCode" id="txtprogramCode"><br><br>
+        <label> programName :</label> <input type="text" name="txtprogramName" id="txtprogramName"><br><br>
+        <!--<label> schoolId:</label> <input type="text" name="txtschoolId" id="txtschoolId"><br><br>-->
+        <label> programLength:</label> <input type="text" name="txtprogramLength" id="txtprogramLength"><br><br>
+        <label>tuitionDomestic:</label> <input type="text" name="txttuitionDomestic" id="txttuitionDomestic"><br><br>
+        <label>tutionInternational:</label> <input type="text" name="txttutionInternational" id="txttutionItxtnternational"><br><br>
+        <label>Is Co-Op (tiny int):</label> <input type="text" name="txtisCoOp" id="txtisCoOp"><br><br>
+        <label>Overall Rating:</label> <input type="text" name="txtoverallRating" id="txtoverallRating"><br><br>
+        <label>Degree Type:</label> <input type="text" name="txtdegreeType" id="txtdegreeType"><br><br>
+        <button id="btnNew">New</button>
+        <button id="btnAdd">Add</button>
+        <button id="btnUpdate">Update</button>
+        <button id="btnDelete">Delete</button>
+        <button id="btnFind">Find</button>
+    </form>
+</body>
+</html>
+
