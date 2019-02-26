@@ -5,22 +5,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Course Ninja</title>
 	<script src="/scripts/jquery-3.3.1.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Karla|Rubik" rel="stylesheet">
 	<link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-<% if(!user){%>
-<form action="/login" method="POST">
-	<input type="text" name="username" value="testUser" />
-	<input type="text" name="password" value="123" />
-	<input type="submit" value="login" />
-</form>
-<a href="/register">Create an Account</a>
-<% } else { %>
-<span>Welcome <%= user %></span>
-<form action="/logout" method="POST">
-	<input type="submit" value="logout" />
-</form>
-<% } %>
+<header>
+	<% if(!user){%>
+	<form class="login" action="/login" method="POST" autocomplete="off">
+		<input type="text" name="username" value="testUser" />
+		<input type="text" name="password" value="123" />
+		<input type="submit" value="login" />
+	</form>
+	<a href="/register"><button>Create an Account</button></a>
+	<% } else { %>
+	<span>Welcome <%= user %></span>
+	<form action="/logout" method="POST">
+		<a><input type="submit" value="logout" /></a>
+	</form>
+	<% } %>
+</header>
 <% if(typeof message !== "undefined"){
 	if(message){ %>
 	<div><%= message %></div>

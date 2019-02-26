@@ -1,70 +1,23 @@
 <% include ./partials/header %>
 
-<h1>Program Reviews</h1>
-
-<!-- Style tag to be removed and placed in stylesheet when we get there -->
-<style>
-  h1 {
-    text-align: center;
-  }
-  .testimonial-group > .row {
-    overflow-x: auto;
-    white-space: nowrap;
-    height: 200px;
-  }
-  .testimonial-group > .row > .col-xs-4 {
-    display: inline-block;
-    float: none;
-    height: 200px;
-  }
-  textarea {
-    resize: none;
-  }
-
-  .col-xs-4 { color: #fff;
-    font-size: 17px;
-    padding-bottom: 20px;
-    padding-top: 18px;
-}
-  .col-xs-4:nth-child(3n+1) {
-    background: #c69;
-  }
-  .col-xs-4:nth-child(3n+2) {
-    background: #9c6;
-  }
-  .col-xs-4:nth-child(3n+3) {
-    background: #69c;
-  }
-  form input {
-    margin: 5px;
-  }
-</style>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<div class="container testimonial-group" id="reviews">
-  <div class="row text-center">
-
-      <% reviews.forEach(function(el, index) { %>
-          <div class="col-xs-4"><b>Review: </b><br /><%= el.reviewBody %> <br><b>Rating: </b><%= el.rating %></div>
-      <% }); %>
-  </div>
+<div class="reviews">
+	<h1>Program Reviews</h1>
+	<div class="review-container">
+	  <div class="row text-center">
+		  <% reviews.forEach(function(el, index) { %>
+			  <div class="review-card"><b>Review: </b><br /><%= el.reviewBody %> <br><b>Rating: </b><%= el.rating %></div>
+		  <% }); %>
+	  </div>
+	</div>
+	<br/>
+	</br/>
+	<form action="/reviews" method="POST" autocomplete="off">
+		<textarea rows="4" cols="50" name="newReview" id="newReview" placeholder="Write your new program review here."></textarea>
+		<br />
+		<input type="text" name="rating" placeholder="rating">
+		<br />
+		<input type="submit" value="Submit" />
+	</form>
 </div>
-
-<br/>
-
-</br/>
-<div class="container">
-  <form class="text-center" action="/reviews" method="POST">
-    <textarea rows="4" cols="50" name="newReview" id="newReview">Write your new program review here.</textarea>
-  	<br />
-    <input type="text" name="rating" value="rating">
-    <br />
-  	<input type="submit" value="Submit" />
-  </form>
-
-</div>
-
-
 
 <% include ./partials/footer %>
