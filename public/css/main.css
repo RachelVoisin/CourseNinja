@@ -103,6 +103,16 @@ header {
 	text-align: right;
 	padding: 0.5em 1em;
 	border-bottom: 2px solid #a33327;
+	position: relative;
+}
+header .logo {
+	position: absolute;
+	left: 15px;
+	top: 0;
+}
+header .logo img {
+	height: 75px;
+	border-radius: 50%;
 }
 header form {
 	display: inline-block;
