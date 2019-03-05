@@ -23,8 +23,8 @@ CREATE TABLE programs (
 	programName VARCHAR(255),
 	schoolId INT(8),
 	programLength VARCHAR(255),
-	tuitionDomestic DECIMAL(5, 2),
-	tutionInternational DECIMAL(5, 2),
+	tuitionDomestic DECIMAL(6, 2),
+	tuitionInternational DECIMAL(6, 2),
 	isCoOp TINYINT(1),
 	overallRating DECIMAL (2, 1),
 	degreeType VARCHAR(255),
@@ -97,11 +97,14 @@ CREATE TABLE vote (
 CREATE TABLE reviews (
 	reviewId INT AUTO_INCREMENT PRIMARY KEY,
 	userId INT(8),
+	programId INT(8),
 	reviewBody VARCHAR(255),
 	rating TINYINT(1),
 	
 	FOREIGN KEY (userId)
-	REFERENCES users(userId)
+	REFERENCES users(userId),
+	FOREIGN KEY (programId)
+	REFERENCES programs(programId)
 	ON DELETE CASCADE
 );
 

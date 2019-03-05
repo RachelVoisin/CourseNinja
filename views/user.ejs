@@ -1,0 +1,15 @@
+<% include ./partials/header %>
+
+<div class="user">
+	<img src="https://openclipart.org/download/247324/abstract-user-flat-1.svg" alt="user icon" />
+	<div>
+		<%= user %><br>
+		<%= email %><br>
+		<%= gradStatus %><br>
+		<% if(typeof programName != "undefined"){ %><%= programName %><% } %>
+		<% if(typeof schoolName != "undefined"){ %><%= schoolName %><% } else { %> Find your program <% } %>
+	</div>
+	<a href="/user/:<%user%>/edit"><button>Edit</button></a>
+</div>
+
+<% include ./partials/footer %>

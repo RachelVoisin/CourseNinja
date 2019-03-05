@@ -2,10 +2,10 @@
 
 .indexWrapper {
 	width: 800px;
-	height: 200px;
+	height: 80vh;
 	text-align: center;
 	margin: 0 auto;
-	overflow: hidden;
+	overflow-x: hidden;
 	position: relative;
 }
 .indexWrapper .form {
@@ -84,14 +84,14 @@ h1, h2, h3, h4 {
 input[type=button], input[type=submit], button {
 	cursor: pointer;
 }
-button, input[type=submit], input[type=button], input[type=text], textarea {
+button, input[type=submit], input[type=button], input[type=text], textarea, input[type=password] {
 	color: #689775;
 	border: 1px solid #689775;
 	border-radius: 3px;
 	background: #262626;
 	padding: 0.2em 0.4em;
 }
-input[type=text], textarea {
+input[type=text], textarea, input[type=password] {
 	border-radius: 0;
 	color: white;
 }
@@ -103,6 +103,16 @@ header {
 	text-align: right;
 	padding: 0.5em 1em;
 	border-bottom: 2px solid #a33327;
+	position: relative;
+}
+header .logo {
+	position: absolute;
+	left: 15px;
+	top: 0;
+}
+header .logo img {
+	height: 75px;
+	border-radius: 50%;
 }
 header form {
 	display: inline-block;
@@ -165,8 +175,18 @@ textarea {
 .reviews input[type=text] {
 	margin-bottom: 0.5em;
 }
-
-
+/* user page */
+.user {
+	width: 75vw;
+	text-align: center;
+	margin: 5% auto;
+	text-align: left;	
+}
+.user img {
+	width: 25vw;
+	padding-right: 2em;
+	float: left;
+}
 
 
 

@@ -10,15 +10,16 @@
 </head>
 <body>
 <header>
+	<a class="logo" href="/"><img src="/images/logo.png" /></a>
 	<% if(!user){%>
 	<form class="login" action="/login" method="POST" autocomplete="off">
 		<input type="text" name="username" value="testUser" />
-		<input type="text" name="password" value="123" />
+		<input type="password" name="password" value="123" />
 		<input type="submit" value="login" />
 	</form>
 	<a href="/register"><button>Create an Account</button></a>
 	<% } else { %>
-	<span>Welcome <%= user %></span>
+	<span><a href="/user/<%= user %>">Welcome <%= user %></a></span>
 	<form action="/logout" method="POST">
 		<a><input type="submit" value="logout" /></a>
 	</form>
