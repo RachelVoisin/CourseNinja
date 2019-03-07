@@ -1,0 +1,46 @@
+<% include ./partials/header %>
+
+<% if(err == "school"){ %>
+	<h2>Could not find school "<%= school %>". Did you mean...</h2>
+	<a href="">Advanced Search</a>
+	<div>divider</div>
+	
+	<!-- make this a partial -->
+	<% if(data.length > 0){ 
+		data.forEach(function(match){ %>
+		<% var ref = "/reviews?school=" + match.name.replace(" ", "+") + "&program=" + program.replace(" ", "+"); %>
+			<a href="<%= ref %>">
+				<div>
+					<h4><%= match.name %></h4>
+					<p><%= match.region %>, <%= match.city %></p>
+				</div>
+			</a>
+			<!-- load 10 at a time? -->
+		<% }); %>
+	<% } else { %>
+		<p>0 results.</p>
+	<% } %>
+<% } else if(err == "program"){ %>
+	<h2>Could not find program "<%= program %>" at <%= school %>. Did you mean...</h2>
+	<a href="">Change School</a>
+	<a href="">Advanced Search</a>
+	<div>divider</div>
+	<!-- make this a partial -->
+	<% if(data.length > 0){ 
+		data.forEach(function(match){ %>
+		<% var ref = "/reviews?school=" + school.replace(" ", "+") + "&program=" + match.name.replace(" ", "+"); %>
+			<a href="<%= ref %>">
+				<div>
+					<h4><%= match.name %></h4>
+					<p><%= match.code %></p>
+				</div>
+			</a>
+			<!-- load 10 at a time? -->
+		<% }); %>
+	<% } else { %>
+		<p>0 results.</p>
+	<% } %>
+	
+<% } %>
+
+<% include ./partials/footer %>
