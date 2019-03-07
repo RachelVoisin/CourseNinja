@@ -1,17 +1,20 @@
 <% include ./partials/header %>
 
-<select name="country"></select>
-<!-- use ajax to generate further selects -->
-<select name="region"></select>
-<select name="city"></select>
+<h4>Enter a Location (optional)</h4>
+<select id="countryInput"><option>Country -- </option></select>
+<select id="regionInput"><option>--</option></select>
+<select id="cityInput"><option>--</option></select>
 
-<input type="text" name="School Keyword">
-<input type="text" name="Program Keyword">
+<br /><br />
+<h4>Enter Keywords (optional)</h4>
+<input type="text" id="keywordsInput" placeholder="Keywords">
 
-<button>Search for Schools</button>
-<button>Search for Programs</button>
+<br /><br />
+<button class="searchBtn" id="schoolBtn">Search for Schools</button>
+<button class="searchBtn" id="programBtn">Search for Programs</button>
 
-school partial
-program partial 
+<div id="output"></div>
+
+<script src="/scripts/searchAJAX.js"></script>
 
 <% include ./partials/footer %>
