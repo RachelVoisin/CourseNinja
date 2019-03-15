@@ -1,0 +1,20 @@
+<% include ./partials/header %>
+
+<h4>Enter a Location (optional)</h4>
+<select id="countryInput"><option>Country -- </option></select>
+<select id="regionInput"><option>--</option></select>
+<select id="cityInput"><option>--</option></select>
+
+<br /><br />
+<h4>Enter Keywords (optional)</h4>
+<input type="text" id="keywordsInput" placeholder="Keywords">
+
+<br /><br />
+<button class="searchBtn" id="schoolBtn">Search for Schools</button>
+<button class="searchBtn" id="programBtn">Search for Programs</button>
+
+<div id="output"></div>
+
+<script src="/scripts/searchAJAX.js"></script>
+
+<% include ./partials/footer %>

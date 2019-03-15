@@ -7,7 +7,7 @@
 				<h1>Find Your School</h1>
 				<input id="schoolInput" type="text" name="school" placeholder="Your School Name" />
 				<br />
-				<input type="button" value="Next" onclick="next()" />
+				<input type="button" id="next" value="Next" />
 			</div>
 			<div id="programForm" class="form programForm">
 				<h1>Find Your Program</h1>
@@ -20,19 +20,9 @@
 </div>
 
 <script src="/scripts/autocomplete.js"></script>
-<script src="/scripts/schoolList.js"></script>
-<script src="/scripts/programList.js"></script>
-<script>
-	autocomplete(document.getElementById("schoolInput"), schoolList);
+<script src="/scripts/autocompleteAJAX.js"></script>
 
-	function next() {
-		document.getElementById("schoolForm").style.left = "-800px";
-		document.getElementById("programForm").style.right = "0";
-		
-		var school = document.getElementById("schoolInput").value;
-		var school = school.replace(" ", "_");
-		autocomplete(document.getElementById("programInput"), programList[school]);
-	}
-</script>
+
+
 
 <% include ./partials/footer %>
