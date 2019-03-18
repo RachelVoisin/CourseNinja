@@ -22,6 +22,7 @@ CREATE TABLE programs (
 	programCode VARCHAR(255),
 	programName VARCHAR(255),
 	schoolId INT(8),
+	schoolName VARCHAR(255),
 	programLength VARCHAR(255),
 	tuitionDomestic DECIMAL(6, 2),
 	tuitionInternational DECIMAL(6, 2),
