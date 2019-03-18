@@ -20,19 +20,42 @@ $('#regionInput').on('change', function(){
 });
 
 $('.searchBtn').on('click', function(){
-	var url = "/search/searching";
 	var data = {
 		country: $('#countryInput').val(),
 		region: $('#regionInput').val(),
 		city: $('#cityInput').val(),
-		keywords: $('#keywordsInput').val()
+		keywords: $('#keywordsInput').val(),
+		offset: 0
 	};
 	if(this.id == "schoolBtn"){
 		data.search = "school";
 	} else if(this.id == "programBtn"){
 		data.search = "program";
 	}
-	//$('#output').append(data.country + " " + data.region + " " + data.city + " " + data.keywords + " " + data.search);
+	$('#output').html("");
+	search(data);
+});
+
+$('body').on('click', '.loadMoreBtn', function(){
+	var data = {
+		country: $('#countryInput').val(),
+		region: $('#regionInput').val(),
+		city: $('#cityInput').val(),
+		keywords: $('#keywordsInput').val(),
+		offset: 1
+	};
+	if(this.id == "schoolLoad"){
+		data.search = "school";
+	} else if(this.id == "programLoad"){
+		data.search = "program";
+	}
+	search(data);
+});
+	
+function search(data){
+	var url = "/search/searching";
+	$('#loadmore').html("");
+	
 	$.ajax({
 		type: "GET",
 		url: url,
@@ -40,15 +63,23 @@ $('.searchBtn').on('click', function(){
 		success: function(result){ 
 			if(data.search == "school"){
 				result.forEach(function(item){
-					$('#output').append(item.name + "<br>");
-					// this should be better
+					var output = "<div><h4>" + item.name + "</h4><p>" + item.city + ", " + item.region + "</p></div>";
+					$('#output').append(output);
 				});
+				if(result.length === 10){
+					var loadMore = '<button class="loadMoreBtn" id="schoolLoad">Load More</button>';
+					$('#loadmore').html(loadMore);
+				}
 
 			} else if(data.search == "program"){
 				result.forEach(function(item){
-					$('#output').append(item.name + "<br>");
-					// this should be better
+					var output = "<div><h4>" + item.name + " - " + item.code + "</h4><p>" + item.school + "</p></div>";
+					$('#output').append(output);
 				});
+				if(result.length === 10){					
+					var loadMore = '<button class="loadMoreBtn" id="programLoad">Load More</button>';
+					$('#loadmore').html(loadMore);
+				}
 			}
 			if(!result.length){
 				$('#output').append("No Results");
@@ -61,7 +92,51 @@ $('.searchBtn').on('click', function(){
 		},
 		dataType: "JSON"
 	});
-});
+}
+
+function searchCopy(data){
+	var url = "/search/searching";
+	$('#loadmore').html("");
+	
+	$.ajax({
+		type: "GET",
+		url: url,
+		data: data,
+		success: function(result){ 
+			if(data.search == "school"){
+				result.forEach(function(item){
+					var output = "<div><h4>" + item.name + "</h4><p>" + item.city + ", " + item.region + "</p></div>";
+					$('#output').append(output);
+				});
+				if(result.length = 10){
+					var loadMore = '<button class="loadMoreBtn" id="schoolLoad">Load More</button>';
+					$('#loadmore').html(loadMore);
+				}
+
+			} else if(data.search == "program"){
+				console.log(result);
+				
+				result.forEach(function(item){
+					var output = "<div><h4>" + item.name + " - " + item.code + "</h4><p>" + item.school + "</p></div>";
+					$('#output').append(output);
+				});
+				if(result.length = 10){
+					var loadMore = '<button class="loadMoreBtn" id="programLoad">Load More</button>';
+					$('#loadmore').html(loadMore);
+				}
+			}
+			if(!result.length){
+				$('#output').append("No Results");
+			}
+		},
+		error:function (jXHR, textStatus, errorThrown){
+			console.log(errorThrown);
+			console.log(textStatus);
+			console.log(jXHR);
+		},
+		dataType: "HTML"
+	});
+}
 
 function fillSelect(data, element){
 	var url = "/search/autocomplete";

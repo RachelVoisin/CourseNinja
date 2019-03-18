@@ -4,14 +4,14 @@
 	<h1>Program Reviews</h1>
 	<div class="review-container">
 	  <div class="row text-center">
-		  <% reviews.forEach(function(el, index) { %>
+		  <% reviews.forEach(function(el) { %>
 			  <div class="review-card"><b>Review: </b><br /><%= el.reviewBody %> <br><b>Rating: </b><%= el.rating %></div>
 		  <% }); %>
 	  </div>
 	</div>
 	<br/>
 	</br/>
-	<form action="/reviews" method="POST" autocomplete="off">
+	<form action="/reviews/<%= program.programId %>" method="POST" autocomplete="off">
 		<textarea rows="4" cols="50" name="newReview" id="newReview" placeholder="Write your new program review here."></textarea>
 		<br />
 		<input type="text" name="rating" placeholder="rating">

@@ -1,6 +1,7 @@
 <% include ./partials/header %>
 
 <div class="index">
+<div id="indexMessageBox"></div>
 	<div class="indexWrapper">
 		<form action="/reviews" method="GET" autocomplete="off">
 			<div id="schoolForm" class="form schoolForm">
@@ -13,7 +14,7 @@
 				<h1>Find Your Program</h1>
 				<input id="programInput" type="text" name="program" placeholder="program name" />
 				<br />
-				<input type="submit" value="Submit" />
+				<input id="submit" type="submit" value="Submit" />
 			</div>
 		</form>
 	</div>
