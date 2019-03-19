@@ -9,7 +9,8 @@ Installation Instructions:
 	npm i express ejs body-parser mysql express-session bcrypt -s
 	
 4. Open MySQL command line and run the source.sql file to create database 
-5. In command line use 'node index.js' to start the server 
-6. Application should now be running at localhost:3000
+5. use database and run seed.sql to inject test data 
+6. In command line use 'node index.js' to start the server 
+7. Application should now be running at localhost:3000
 
  
