@@ -8,6 +8,7 @@ var bodyParser = require("body-parser"),
 	
 var accountRoutes = require("./routes/account");
 var searchRoutes = require("./routes/search");
+var adminRoutes = require("./routes/admin");
 
 const PORT = process.env.PORT || 3000
 
@@ -72,31 +73,24 @@ app.get("/autocomplete", function(req, res){
 	}
 });
 
-
-app.get("/admin", isLoggedIn, function(req, res){
-	if (req.session.username == 'admin'){
-		res.send("You passed the test!");
-	}
-});
-
 app.get("/reviews", function(req, res){
 	var school = req.query.school;
 	var program = req.query.program;
 	var reviews = [];
-	var sql = "SELECT schoolId FROM schools WHERE schoolName = '" + school + "';";
+	var sql = "SELECT * FROM schools WHERE schoolName = '" + school + "';";
 	con.query(sql, function(err, results){
 		if(err){
 			req.session.message = 'Database could not be reached: ' + err;
 			res.redirect('/');
 		} else if(results.length){
-			var schoolId = results[0].schoolId;
-			var sql = "SELECT * FROM programs WHERE schoolId = " + schoolId + " AND programName = '" + program + "';";
+			school = results[0];
+			var sql = "SELECT * FROM programs WHERE schoolId = " + school.schoolId + " AND programName = '" + program + "';";
 			con.query(sql, function(err, results){
 				if(err){
 					req.session.message = 'Database could not be reached: '+ err;
 					res.redirect('/');
-				} else if(results.length){
-					var program = results[0];
+				} else if(results.length > 0){
+					program = results[0];
 					var sql = "SELECT reviewBody, rating FROM reviews WHERE programId = " + program.programId + ";";
 					con.query(sql, function(err, results){
 						if(err){
@@ -106,10 +100,10 @@ app.get("/reviews", function(req, res){
 							results.forEach(function(el, index) {
 								reviews.push(el);
 							});
-							res.render("reviews", {reviews: reviews, program: program});
+							res.render("reviews", {reviews: reviews, program: program, school: school});
 						} else {
 							res.locals.message = 'Be the first to leave a review!';
-							res.render("reviews", {reviews: reviews, program: program});
+							res.render("reviews", {reviews: reviews, program: program, school: school});
 						}
 					});
 				} else {
@@ -162,45 +156,37 @@ function searchError(req, res, err, school, program){
 			}
 		});	
 	} else if(err == "program"){
-		var sql = "SELECT schoolId FROM schools WHERE schoolName = '" + school + "';";
+		var sql = "SELECT * FROM programs WHERE schoolId = '" + school.schoolId + "' AND";
+		var wordArray = program.split(" ");
+		
+		wordArray.forEach(function(keyword){
+			keyword = keyword.toLowerCase();
+			if(excludes.indexOf(keyword) != -1 | keyword.length < 2){
+				var index = wordArray.indexOf(keyword);
+				wordArray.splice(index, 1);
+			}
+		});
+		
+		for(var i = 0; i < wordArray.length; i++){
+			if(i == 0){
+				sql += " LOWER(programName) LIKE '%" + wordArray[i] + "%'";
+			} else {
+				sql += " OR LOWER(programName) LIKE '%" + wordArray[i] + "%'";
+			}
+		}
+		sql += ";";	
 		con.query(sql, function(err ,results){
 			if(err){
 				req.session.message = 'Database could not be reached: ' + err;
 				res.redirect('/');
 			} else {
-				var sql = "SELECT * FROM programs WHERE schoolId = '" + results[0].schoolId + "' AND";
-				var wordArray = program.split(" ");
-				
-				wordArray.forEach(function(keyword){
-					keyword = keyword.toLowerCase();
-					if(excludes.indexOf(keyword) != -1 | keyword.length < 2){
-						var index = wordArray.indexOf(keyword);
-						wordArray.splice(index, 1);
-					}
+				results.forEach(function(program) {
+					data.push({
+						name: program.programName,
+						code: program.programCode
+					});
 				});
-				
-				for(var i = 0; i < wordArray.length; i++){
-					if(i == 0){
-						sql += " LOWER(programName) LIKE '%" + wordArray[i] + "%'";
-					} else {
-						sql += " OR LOWER(programName) LIKE '%" + wordArray[i] + "%'";
-					}
-				}
-				sql += ";";	
-				con.query(sql, function(err ,results){
-					if(err){
-						req.session.message = 'Database could not be reached: ' + err;
-						res.redirect('/');
-					} else {
-						results.forEach(function(program) {
-							data.push({
-								name: program.programName,
-								code: program.programCode
-							});
-						});
-						res.render("searchError", {err: "program", data: data, school: school, program: program});
-					}
-				});	
+				res.render("searchError", {err: "program", data: data, school: school, program: program});
 			}
 		});	
 	}
@@ -208,7 +194,7 @@ function searchError(req, res, err, school, program){
 
 app.post("/reviews/:id", function(req, res){
 	var review = req.body.newReview;
-	var rating= req.body.rating;
+	var rating = req.body.rating;
 	var programId = req.params.id;
 
 	var sql = "INSERT INTO reviews (programId, reviewBody, rating) VALUES ('" + programId + "','" + review + "','" + rating +"');"
@@ -224,6 +210,7 @@ app.post("/reviews/:id", function(req, res){
 
 app.use(accountRoutes);
 app.use(searchRoutes);
+app.use(adminRoutes);
 
 
 // redirect any unidentified urls or routes to home

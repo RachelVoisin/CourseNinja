@@ -1,5 +1,4 @@
 /* styles for index page slide effect */
-
 .indexWrapper {
 	width: 800px;
 	height: 80vh;
@@ -50,143 +49,104 @@
   background-color: #689775 !important; 
   color: #ffffff; 
 }
-/* GENERAL STYLES
-
-colors in use:
-dark (background): #262626
-white (font)
-light gray/red (headers):  #ad8174
-light grey (placeholder): #a0a0a0
-gray: #917164
-blue(links): #689775
-dark red: #a33327
-light red: #c7493a
-
-*/
-html, body, * {
-	padding: 0;
-	margin: 0;
-}
+/* GENERAL STYLES */
 body {
-	background: #262626;
-	color: white;
 	font-family: 'Karla', sans-serif;
-}
-a {
-	text-decoration: none;
-	color: #689775;
 }
 h1, h2, h3, h4 {
 	font-weight: normal;
 	font-family: 'Rubik', sans-serif;
-	color: #ad8174;
 }
 input[type=button], input[type=submit], button {
 	cursor: pointer;
 }
-button, input[type=submit], input[type=button], input[type=text], textarea, input[type=password] {
-	color: #689775;
-	border: 1px solid #689775;
-	border-radius: 3px;
-	background: #262626;
-	padding: 0.2em 0.4em;
-}
-input[type=text], textarea, input[type=password] {
-	border-radius: 0;
-	color: white;
-}
-::-webkit-input-placeholder { 
-  color: #a0a0a0;
-}
-/* Header */
-header {
-	text-align: right;
-	padding: 0.5em 1em;
-	border-bottom: 2px solid #a33327;
-	position: relative;
-}
-header .logo {
-	position: absolute;
-	left: 15px;
-	top: 0;
-}
-header .logo img {
-	height: 75px;
-	border-radius: 50%;
-}
-header form {
-	display: inline-block;
-}
-header span {
-	display: inline-block;
-}
-header .login, header span {
-	padding-right: 1em;
-	border-right: 1px solid #a33327;
-}
-header a {
-	display: inline-block;
-	padding-left: 1em;
-}
-/* Index Page */
-.index {
-	margin-top: 5%;
-}
-.index h1 {
-	text-align: center;
-	margin-bottom: 2%;
-	font-size: 3em;
-}
-.index input, {
-	font-size: 1.2em;
-}
-.index input[type=text] {
-	margin-bottom: 0.5%;
-	font-size: 1.5em;
-}
-/* Register Page */
-.register, .reviews {
-	width: 50vw;
-	text-align: center;
-	margin: 5% auto;
-}
-.register input {
-	display: block;
-	margin: 0.5em auto;
-	font-size: 1.2em;
-}
+
 /* reviews page */
 textarea {
 	resize: none;
 }
-/* need to make this scroll sideways or something */
-.review-container {
-	margin-top: 2em;
-	border: 1px solid #c7493a;
+/* star review rating stuff */
+#revScroll{
+	max-width: 650px;
+	overflow-y: hidden;
 }
-.review-card {
-	display: inline-block;
-	padding: 0.5em 1em;
+a i[class="fa fa-flag"]{
+	opacity: 1.7;
+	padding-top: 35px;
+	padding-left: 90px;
+	color: #ffb3b3;
 }
-.review-card:nth-child(even) {
-	background: white;
-	color: #262626;
+#submitReview {
+	margin-top: 5px;
 }
-.reviews input[type=text] {
-	margin-bottom: 0.5em;
+#stats {
+	line-height: 1.5;
+	padding: 20px;
+	width: 400px;
+	font-size: 25px;
+	margin: 0 auto;
+	text-align: left;
 }
-/* user page */
-.user {
-	width: 75vw;
-	text-align: center;
-	margin: 5% auto;
-	text-align: left;	
+h5 span {
+	font-size: 20px;
 }
-.user img {
-	width: 25vw;
-	padding-right: 2em;
-	float: left;
+/* stars or something? is this working? */
+.rating {
+  --uiRatingSize: var(--ratingSize, 20px);
+  --uiRatingColor: var(--ratingColor, #eee);
+  --uiRatingColorActive: var(--ratingColorActive, #ffcc00);
+  --uiRatingStroke: var(--ratingStroke, #222);
+  --uiRatingStrokeWidth: var(--ratingStrokeWidth, 1px);
+  display: flex;
+  font-size: var(--uiRatingSize);
+  color: var(--uiRatingColor);
+  position: relative;
 }
+.rating__control {
+	position: absolute;
+	left: -9999px;
+}
+.rating__item {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  position: relative;
+}
+.rating__item {
+	padding-left: .25em;
+  padding-right: .25em;
+}
+.rating__star {
+	display: block;
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+	stroke: var(--uiRatingStroke);
+	stroke-width: var(--uiRatingStrokeWidth);
+}
+.rating__label {
+	position: absolute;
+	top: 0;
+	left: -9999px;
+}
+.rating:hover,
+.rating__control:nth-of-type(1):checked ~ .rating__item:nth-of-type(1),
+.rating__control:nth-of-type(2):checked ~ .rating__item:nth-of-type(-n+2),
+.rating__control:nth-of-type(3):checked ~ .rating__item:nth-of-type(-n+3),
+.rating__control:nth-of-type(4):checked ~ .rating__item:nth-of-type(-n+4),
+.rating__control:nth-of-type(5):checked ~ .rating__item:nth-of-type(-n+5){
+	color: var(--uiRatingColorActive);
+}
+.rating__item:hover ~ .rating__item {
+  color: var(--uiRatingColor);
+}
+.rating {
+  margin-left: 105px;
+  margin-top: 10px;
+  --ratingSize: 30px;
+  --ratingColor: #eee;
+  --ratingColorActive: #ffcc10;
+}
+
 
 
 

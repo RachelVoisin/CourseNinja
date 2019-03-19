@@ -1,0 +1,60 @@
+<% include ../partials/header %>
+
+<div class="" style="margin-left: 50px; margin-right: 50px">
+    <div class="col s12">
+        <a href="/admin/program/add" class="btn btn-success btn-lg">Add a new program</a>
+    </div>
+</div>
+<br>
+
+<!-- This is data view-->
+<div class="" style="margin-left: 50px; margin-right: 50px">
+    <div class="col s12">
+        <!--check if items (database values) is not empty -->
+        <% if (items.length > 0) {%>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width:1%; text-align:center">ID</th>
+                        <th style="width:9%">Program Code</th>
+                        <th style="width:9%">Program Name</th>
+                        <th style="width:1%;text-align:center ">School ID</th>
+                        <th style="width:5%">Program Length</th>
+                        <th style="width:10%">Tuition Domestic</th>
+                        <th style="width:10%">Tuition International</th>
+                        <th style="width:1%;text-align:center ">Is Co-Op</th>
+                        <th style="width:5%">Overall Rating</th>
+                        <th style="width:9%">Degree Type</th>
+                        <th solspan="2" style="width:40%;text-align:center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- iterate through all objects and get specific data-->
+                    
+                    <% for(var key in items){%>
+                        <tr>
+                                <td style="width:1%; text-align:center"><%= items[key].programId %></td>
+                                <td style="width:9%"><%=items[key].programCode %></td>
+                                <td style="width:9%"><%=items[key].programName %></td>
+                                <td style="width:1%;text-align:center "><%=items[key].schoolId %></td>
+                                <td style="width:5%"><%=items[key].programLength%></td>
+                                <td style="width:10%"><%=items[key].tuitionDomestic %></td>
+                                <td style="width:10%"><%=items[key].tuitionInternational %></td>
+                                <td style="width:1%;text-align:center "><%=items[key].isCoOp %></td>
+                                <td style="width:5%"><%=items[key].overallRating %></td>
+                                <td style="width:9%"><%=items[key].degreeType %></td>
+                                <td solspan="2" style="width:40%;text-align:center">
+                                    <a href="/admin/program/edit/ <%= items[key].programId %>" class="btn btn-success">Edit</a>
+                                    <a href="/admin/program/delete/<%= items[key].programId %>" class="btn btn-danger">Delete</a>
+                                </td> 
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <% }else{ %>
+            <p><strong>No records available</strong></p>
+        <% } %>    
+    </div>
+</div>
+
+<% include ../partials/footer %>

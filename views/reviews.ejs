@@ -1,23 +1,53 @@
 <% include ./partials/header %>
 
-<div class="reviews">
-	<h1>Program Reviews</h1>
-	<div class="review-container">
+<div class="reviews ">
+	<h1>Program Reviews for <b><%= program.programName %></b></h1>
+		<h4> at <%= school.schoolName %></h4>
+	<div class="review-container" id="revScroll">
 	  <div class="row text-center">
-		  <% reviews.forEach(function(el) { %>
-			  <div class="review-card"><b>Review: </b><br /><%= el.reviewBody %> <br><b>Rating: </b><%= el.rating %></div>
+		  <% reviews.forEach(function(el, index) { %>
+			  <div class="review-card"><b>Review: </b><br /><%= el.reviewBody %> <br><b>Rating: </b><%= el.rating %></br><a href="#"><i class="fa fa-flag"></i></a></div>
 		  <% }); %>
 	  </div>
 	</div>
 	<br/>
 	</br/>
 	<form action="/reviews/<%= program.programId %>" method="POST" autocomplete="off">
-		<textarea rows="4" cols="50" name="newReview" id="newReview" placeholder="Write your new program review here."></textarea>
+		<textarea rows="4" cols="50" name="newReview" placeholder="Write your new program review here."></textarea>
 		<br />
-		<input type="text" name="rating" placeholder="rating">
+		<input type="text" name="rating" value="" placeholder="rating">
 		<br />
-		<input type="submit" value="Submit" />
+		<div>
+		<input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+		</div>
 	</form>
+	<br  />
+	<h2>Program Info</h2>
+	<div id="stats">
+		<h5>Program Name: <span><%= program.programName %></span></h5>
+		<h5>Program Code: <span><%= program.programCode %></span></h5>
+		<h5>Program Length: <span><%= program.programLength %></span></h5>
+		<h5>School: <span><%= school.schoolName %></span></h5>
+		<h5>Location: <span><%= school.schoolCity %>, <%= school.schoolRegion %>, <%= school.schoolCountry %></span></h5>
+		<h5>Tuition (Domestic): <span><%= program.tuitionDomestic %></span></h5>
+		<h5>Tuition (International): <span><%= program.tuitionInternational %></span></h5>
+		<h5>Co-Op Program: <span>
+			<% if(program.isCoOp == 0){ %>
+				<%= "No" %>
+			<% }else{ %>
+				<%= "Yes" %>
+			<% } %>
+		</span></h5>
+		<h5>Overall Rating: <span>
+			<div id="overall_rating">
+			<% for(var i = 0; i < program.overallRating; i++){ %>
+				<i class="fas fa-star"></i> 
+			<% } %>
+			</div>
+		</span>
+	</h5>
+		<h5>Degree Type: <span><%= program.degreeType %></span></h5>
+	</div>
 </div>
 
 <% include ./partials/footer %>
