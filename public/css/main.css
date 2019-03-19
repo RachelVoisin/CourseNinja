@@ -1,5 +1,4 @@
 /* styles for index page slide effect */
-
 .indexWrapper {
 	width: 800px;
 	height: 80vh;
@@ -16,9 +15,11 @@
 }
 .indexWrapper .schoolForm {
 	left: 0;
+	top:30%;
 }
 .indexWrapper .programForm {
 	right: -800px;
+	top:30%;
 	transition-delay: 0.5s;
 }
 
@@ -44,32 +45,24 @@
   border-bottom: 1px solid #d4d4d4; 
 }
 .autocomplete-items div:hover {
-  background-color: #a6cdb1; 
+  background-color: #d15039; 
 }
 .autocomplete-active {
-  background-color: #689775 !important; 
-  color: #ffffff; 
+  background-color: #d15039 !important; 
+  color: white; 
 }
-/* GENERAL STYLES
-
-colors in use:
-dark (background): #262626
-white (font)
-light gray/red (headers):  #ad8174
-light grey (placeholder): #a0a0a0
-gray: #917164
-blue(links): #689775
-dark red: #a33327
-light red: #c7493a
-
-*/
+/* GENERAL STYLES */
 html, body, * {
 	padding: 0;
 	margin: 0;
 }
 body {
-	background: #262626;
-	color: white;
+	background: #ffffff;
+	/*background-image: url(/images/school.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed; */
+	color: #000;
 	font-family: 'Karla', sans-serif;
 }
 a {
@@ -78,55 +71,43 @@ a {
 }
 h1, h2, h3, h4 {
 	font-weight: normal;
-	font-family: 'Rubik', sans-serif;
-	color: #ad8174;
+	font-family:'Khula', sans-serif;
 }
-input[type=button], input[type=submit], button {
+/*input[type=button], input[type=submit], button {
 	cursor: pointer;
-}
-button, input[type=submit], input[type=button], input[type=text], textarea, input[type=password] {
-	color: #689775;
-	border: 1px solid #689775;
-	border-radius: 3px;
-	background: #262626;
-	padding: 0.2em 0.4em;
-}
+} */
 input[type=text], textarea, input[type=password] {
-	border-radius: 0;
-	color: white;
+	color: #689775;
+	border: 1px solid #b83b25;
+	border-radius: 3px;
+} 
+nav input, nav a {
+	margin-right: 1em;
 }
+#message, #indexMessageBox {
+	padding-left: 2em;
+	color: red;
+}
+/* -- bootstrap button overwrite -- */
+.btn-primary:hover {
+    color: #fff;
+    background-color: #b83b25;
+    border-color: #b83b25;
+}
+.btn-group-lg>.btn, .btn-lg {
+    padding: .5rem .4rem;
+    font-size: .9rem;
+    line-height: 1.2;
+    border-radius: .3rem;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #d15039;
+    border-color: #d15039;
+}
+/* -- bootstrap button overwrite end -- */
 ::-webkit-input-placeholder { 
   color: #a0a0a0;
-}
-/* Header */
-header {
-	text-align: right;
-	padding: 0.5em 1em;
-	border-bottom: 2px solid #a33327;
-	position: relative;
-}
-header .logo {
-	position: absolute;
-	left: 15px;
-	top: 0;
-}
-header .logo img {
-	height: 75px;
-	border-radius: 50%;
-}
-header form {
-	display: inline-block;
-}
-header span {
-	display: inline-block;
-}
-header .login, header span {
-	padding-right: 1em;
-	border-right: 1px solid #a33327;
-}
-header a {
-	display: inline-block;
-	padding-left: 1em;
 }
 /* Index Page */
 .index {
@@ -135,7 +116,7 @@ header a {
 .index h1 {
 	text-align: center;
 	margin-bottom: 2%;
-	font-size: 3em;
+	font-size: 2.6em;
 }
 .index input, {
 	font-size: 1.2em;
@@ -145,7 +126,7 @@ header a {
 	font-size: 1.5em;
 }
 /* Register Page */
-.register, .reviews {
+.register, .reviews, .flag {
 	width: 50vw;
 	text-align: center;
 	margin: 5% auto;
@@ -155,22 +136,29 @@ header a {
 	margin: 0.5em auto;
 	font-size: 1.2em;
 }
-/* reviews page */
+/* -- reviews page -- */
 textarea {
 	resize: none;
 }
 /* need to make this scroll sideways or something */
 .review-container {
 	margin-top: 2em;
-	border: 1px solid #c7493a;
+}
+@media (min-width: 576px){
+	.jumbotron {
+		padding: 2rem 2rem;
+	}
+}
+.jumbotron {
+    margin-bottom: .1rem;
+    width: 100%;
+    background-color: #f3f3f3;
 }
 .review-card {
 	display: inline-block;
 	padding: 0.5em 1em;
-}
-.review-card:nth-child(even) {
-	background: white;
-	color: #262626;
+	width:100%;
+	background-color:#a0a0a0;
 }
 .reviews input[type=text] {
 	margin-bottom: 0.5em;
@@ -187,7 +175,33 @@ textarea {
 	padding-right: 2em;
 	float: left;
 }
-
+/* -- Search Page -- */
+.search-container{
+	text-align: left;
+	margin: 5%;
+	float:left;
+	padding: 4em;
+	background-color: #f3f3f3;
+	border: 1px solid #c5c5c5;
+	border-radius: 4px;
+	width: 35%;
+}
+.card{
+	text-align: left;
+	margin: 5%;
+	float:right;
+	padding: 4em;
+	background-color: #f7f7f7;
+	border-radius: 4px;
+	width: 45%;
+}
+.programInfo {
+	text-align:left;
+	font-size:1.2em;
+}
+.programInfo .row:nth-of-type(even) {
+	background: #d8d8d8;
+}
 
 
 

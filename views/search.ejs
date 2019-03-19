@@ -1,20 +1,24 @@
 <% include ./partials/header %>
 
-<h4>Enter a Location (optional)</h4>
-<select id="countryInput"><option>Country -- </option></select>
-<select id="regionInput"><option>--</option></select>
-<select id="cityInput"><option>--</option></select>
+<div class="search-container">
+	<h4>Enter a Location (optional)</h4>
+	<select class="form-control" id="countryInput"><option>Country -- </option></select>
+	<select class="form-control" id="regionInput"><option>--</option></select>
+	<select class="form-control" id="cityInput"><option>--</option></select>
 
-<br /><br />
-<h4>Enter Keywords (optional)</h4>
-<input type="text" id="keywordsInput" placeholder="Keywords">
+	<br /><br />
+	<h4>Enter Keywords (optional)</h4>
+	<input class="form-control" type="text" id="keywordsInput" placeholder="Keywords">
 
-<br /><br />
-<button class="searchBtn" id="schoolBtn">Search for Schools</button>
-<button class="searchBtn" id="programBtn">Search for Programs</button>
+	<br /><br />
+	<button class="searchBtn" id="schoolBtn">Search for Schools</button>
+	<button class="searchBtn" id="programBtn">Search for Programs</button>
+</div>
 
-<div id="output"></div>
-<div id="loadmore"></div>
+<div class="card">
+	<div id="output"></div>
+	<div id="loadmore"></div>
+</div>
 
 <script src="/scripts/searchAJAX.js"></script>
 
