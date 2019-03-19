@@ -109,4 +109,12 @@ CREATE TABLE reviews (
 	ON DELETE CASCADE
 );
 
+CREATE TABLE flags (
+	flagId INT AUTO_INCREMENT PRIMARY KEY,
+	objectType VARCHAR(255),
+	objectReference VARCHAR(255),
+	reason VARCHAR(255),
+	isComplete TINYINT(1)
+);
+
 

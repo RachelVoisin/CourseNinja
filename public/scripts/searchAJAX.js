@@ -94,50 +94,6 @@ function search(data){
 	});
 }
 
-function searchCopy(data){
-	var url = "/search/searching";
-	$('#loadmore').html("");
-	
-	$.ajax({
-		type: "GET",
-		url: url,
-		data: data,
-		success: function(result){ 
-			if(data.search == "school"){
-				result.forEach(function(item){
-					var output = "<div><h4>" + item.name + "</h4><p>" + item.city + ", " + item.region + "</p></div>";
-					$('#output').append(output);
-				});
-				if(result.length = 10){
-					var loadMore = '<button class="loadMoreBtn" id="schoolLoad">Load More</button>';
-					$('#loadmore').html(loadMore);
-				}
-
-			} else if(data.search == "program"){
-				console.log(result);
-				
-				result.forEach(function(item){
-					var output = "<div><h4>" + item.name + " - " + item.code + "</h4><p>" + item.school + "</p></div>";
-					$('#output').append(output);
-				});
-				if(result.length = 10){
-					var loadMore = '<button class="loadMoreBtn" id="programLoad">Load More</button>';
-					$('#loadmore').html(loadMore);
-				}
-			}
-			if(!result.length){
-				$('#output').append("No Results");
-			}
-		},
-		error:function (jXHR, textStatus, errorThrown){
-			console.log(errorThrown);
-			console.log(textStatus);
-			console.log(jXHR);
-		},
-		dataType: "HTML"
-	});
-}
-
 function fillSelect(data, element){
 	var url = "/search/autocomplete";
 	$.ajax({

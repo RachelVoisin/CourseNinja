@@ -1,0 +1,34 @@
+<% include ./partials/header %>
+
+<div class="flag">
+	<% if(type == "review"){ %>
+		<div class="jumbotron jumbotron-fluid">
+			<b class="lead">Review: </b><span class="lead"><%= review.reviewBody %></span>
+			<br />
+			<b>Rating: </b><%= review.rating %>
+		</div>
+		<br />
+		<h3>I would like to flag this because:</h3>
+		<br />
+		<form action="/flag/review/<%= review.reviewId %>" method="POST">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4"><input type="radio" name="flag" value="language" /></div>
+					<div class="col-lg-8" style="text-align:left;"><label>It contains offensive or inappropriate language</label></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4"><input type="radio" name="flag" value="topic" /></div>
+					<div class="col-lg-8" style="text-align:left;"><label>This review is not helpful or not on-topic</label></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4"><input type="radio" name="flag" value="personal" /></div>
+					<div class="col-lg-8" style="text-align:left;"><label>This review contains my name and I am not comfortable with that</label></div>
+				</div>
+			</div>
+			<br />
+			<input class="btn btn-lg btn-primary" type="submit" value="Submit" />
+		</form>
+	<% } %>
+</div>
+
+<% include ./partials/footer %>

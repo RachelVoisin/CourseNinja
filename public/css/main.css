@@ -15,9 +15,11 @@
 }
 .indexWrapper .schoolForm {
 	left: 0;
+	top:30%;
 }
 .indexWrapper .programForm {
 	right: -800px;
+	top:30%;
 	transition-delay: 0.5s;
 }
 
@@ -43,111 +45,163 @@
   border-bottom: 1px solid #d4d4d4; 
 }
 .autocomplete-items div:hover {
-  background-color: #a6cdb1; 
+  background-color: #d15039; 
 }
 .autocomplete-active {
-  background-color: #689775 !important; 
-  color: #ffffff; 
+  background-color: #d15039 !important; 
+  color: white; 
 }
 /* GENERAL STYLES */
+html, body, * {
+	padding: 0;
+	margin: 0;
+}
 body {
+	background: #ffffff;
+	/*background-image: url(/images/school.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed; */
+	color: #000;
 	font-family: 'Karla', sans-serif;
+}
+a {
+	text-decoration: none;
+	color: #689775;
 }
 h1, h2, h3, h4 {
 	font-weight: normal;
-	font-family: 'Rubik', sans-serif;
+	font-family:'Khula', sans-serif;
 }
-input[type=button], input[type=submit], button {
+/*input[type=button], input[type=submit], button {
 	cursor: pointer;
+} */
+input[type=text], textarea, input[type=password] {
+	color: #689775;
+	border: 1px solid #b83b25;
+	border-radius: 3px;
+} 
+nav input, nav a {
+	margin-right: 1em;
 }
-
-/* reviews page */
+#message, #indexMessageBox {
+	padding-left: 2em;
+	color: red;
+}
+/* -- bootstrap button overwrite -- */
+.btn-primary:hover {
+    color: #fff;
+    background-color: #b83b25;
+    border-color: #b83b25;
+}
+.btn-group-lg>.btn, .btn-lg {
+    padding: .5rem .4rem;
+    font-size: .9rem;
+    line-height: 1.2;
+    border-radius: .3rem;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #d15039;
+    border-color: #d15039;
+}
+/* -- bootstrap button overwrite end -- */
+::-webkit-input-placeholder { 
+  color: #a0a0a0;
+}
+/* Index Page */
+.index {
+	margin-top: 5%;
+}
+.index h1 {
+	text-align: center;
+	margin-bottom: 2%;
+	font-size: 2.6em;
+}
+.index input, {
+	font-size: 1.2em;
+}
+.index input[type=text] {
+	margin-bottom: 0.5%;
+	font-size: 1.5em;
+}
+/* Register Page */
+.register, .reviews, .flag {
+	width: 50vw;
+	text-align: center;
+	margin: 5% auto;
+}
+.register input {
+	display: block;
+	margin: 0.5em auto;
+	font-size: 1.2em;
+}
+/* -- reviews page -- */
 textarea {
 	resize: none;
 }
-/* star review rating stuff */
-#revScroll{
-	max-width: 650px;
-	overflow-y: hidden;
+/* need to make this scroll sideways or something */
+.review-container {
+	margin-top: 2em;
 }
-a i[class="fa fa-flag"]{
-	opacity: 1.7;
-	padding-top: 35px;
-	padding-left: 90px;
-	color: #ffb3b3;
+@media (min-width: 576px){
+	.jumbotron {
+		padding: 2rem 2rem;
+	}
 }
-#submitReview {
-	margin-top: 5px;
+.jumbotron {
+    margin-bottom: .1rem;
+    width: 100%;
+    background-color: #f3f3f3;
 }
-#stats {
-	line-height: 1.5;
-	padding: 20px;
-	width: 400px;
-	font-size: 25px;
-	margin: 0 auto;
+.review-card {
+	display: inline-block;
+	padding: 0.5em 1em;
+	width:100%;
+	background-color:#a0a0a0;
+}
+.reviews input[type=text] {
+	margin-bottom: 0.5em;
+}
+/* user page */
+.user {
+	width: 75vw;
+	text-align: center;
+	margin: 5% auto;
+	text-align: left;	
+}
+.user img {
+	width: 25vw;
+	padding-right: 2em;
+	float: left;
+}
+/* -- Search Page -- */
+.search-container{
 	text-align: left;
+	margin: 5%;
+	float:left;
+	padding: 4em;
+	background-color: #f3f3f3;
+	border: 1px solid #c5c5c5;
+	border-radius: 4px;
+	width: 35%;
 }
-h5 span {
-	font-size: 20px;
+.card{
+	text-align: left;
+	margin: 5%;
+	float:right;
+	padding: 4em;
+	background-color: #f7f7f7;
+	border-radius: 4px;
+	width: 45%;
 }
-/* stars or something? is this working? */
-.rating {
-  --uiRatingSize: var(--ratingSize, 20px);
-  --uiRatingColor: var(--ratingColor, #eee);
-  --uiRatingColorActive: var(--ratingColorActive, #ffcc00);
-  --uiRatingStroke: var(--ratingStroke, #222);
-  --uiRatingStrokeWidth: var(--ratingStrokeWidth, 1px);
-  display: flex;
-  font-size: var(--uiRatingSize);
-  color: var(--uiRatingColor);
-  position: relative;
+.programInfo {
+	text-align:left;
+	font-size:1.2em;
 }
-.rating__control {
-	position: absolute;
-	left: -9999px;
+.programInfo .row:nth-of-type(even) {
+	background: #d8d8d8;
 }
-.rating__item {
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
-  position: relative;
-}
-.rating__item {
-	padding-left: .25em;
-  padding-right: .25em;
-}
-.rating__star {
-	display: block;
-	width: 1em;
-	height: 1em;
-	fill: currentColor;
-	stroke: var(--uiRatingStroke);
-	stroke-width: var(--uiRatingStrokeWidth);
-}
-.rating__label {
-	position: absolute;
-	top: 0;
-	left: -9999px;
-}
-.rating:hover,
-.rating__control:nth-of-type(1):checked ~ .rating__item:nth-of-type(1),
-.rating__control:nth-of-type(2):checked ~ .rating__item:nth-of-type(-n+2),
-.rating__control:nth-of-type(3):checked ~ .rating__item:nth-of-type(-n+3),
-.rating__control:nth-of-type(4):checked ~ .rating__item:nth-of-type(-n+4),
-.rating__control:nth-of-type(5):checked ~ .rating__item:nth-of-type(-n+5){
-	color: var(--uiRatingColorActive);
-}
-.rating__item:hover ~ .rating__item {
-  color: var(--uiRatingColor);
-}
-.rating {
-  margin-left: 105px;
-  margin-top: 10px;
-  --ratingSize: 30px;
-  --ratingColor: #eee;
-  --ratingColorActive: #ffcc10;
-}
-
-
 
 
 

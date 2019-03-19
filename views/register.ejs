@@ -3,11 +3,11 @@
 <div class="register">
 	<h1>Create An Account</h1>
 	<form action="/register" method="POST" autocomplete="off">
-		<input type="text" name="email" <% if(typeof email !== "undefined" && email.length > 0){ %> value="<%= email %>"<% } else { %> placeholder="Email" <% } %> />
-		<input type="text" name="username" <% if(typeof signupName !== "undefined" && signupName.length > 0){ %> value="<%= signupName %>"<% } else { %>  placeholder="Username" <% } %>/>
-		<input type="password" name="password" <% if(typeof password !== "undefined" && password.length > 0){ %> value="<%= password %>"<% } else { %> placeholder="Password" <% } %>/>
-		<input type="password" name="password2" <% if(typeof password2 !== "undefined" && password2.length > 0){ %> value="<%= password2 %>"<% } else { %>  placeholder="Repeat Password" <% } %>/>
-		<input type="submit" value="Submit" />
+		<input class="form-control" type="text" name="email" <% if(typeof email !== "undefined" && email.length > 0){ %> value="<%= email %>"<% } else { %> placeholder="Email" <% } %> />
+		<input class="form-control" type="text" name="username" <% if(typeof signupName !== "undefined" && signupName.length > 0){ %> value="<%= signupName %>"<% } else { %>  placeholder="Username" <% } %>/>
+		<input class="form-control" type="password" name="password" <% if(typeof password !== "undefined" && password.length > 0){ %> value="<%= password %>"<% } else { %> placeholder="Password" <% } %>/>
+		<input class="form-control" type="password" name="password2" <% if(typeof password2 !== "undefined" && password2.length > 0){ %> value="<%= password2 %>"<% } else { %>  placeholder="Repeat Password" <% } %>/>
+		<input class="btn btn-lg btn-primary" type="submit" value="Submit" />
 	</form>
 </div>
 

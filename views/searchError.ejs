@@ -2,8 +2,7 @@
 
 <% if(err == "school"){ %>
 	<h2>Could not find school "<%= school %>". Did you mean...</h2>
-	<a href="">Advanced Search</a>
-	<div>divider</div>
+	<a href="/search">Advanced Search</a>
 	
 	<!-- make this a partial -->
 	<% if(data.length > 0){ 
@@ -22,9 +21,9 @@
 	<% } %>
 <% } else if(err == "program"){ %>
 	<h2>Could not find program "<%= program %>" at <%= school.schoolName %>. Did you mean...</h2>
-	<a href="">Change School</a>
-	<a href="">Advanced Search</a>
-	<div>divider</div>
+	<a href="/">Change School</a>
+	or
+	<a href="/search">Advanced Search</a>
 	<!-- make this a partial -->
 	<% if(data.length > 0){ 
 		data.forEach(function(match){ %>
@@ -40,7 +39,6 @@
 	<% } else { %>
 		<p>0 results.</p>
 	<% } %>
-	
 <% } %>
 
 <% include ./partials/footer %>
