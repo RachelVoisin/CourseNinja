@@ -15,21 +15,34 @@ router.get('/admin/program/add', isLoggedIn, isAdmin, function(req,res){
 	res.render('admin/add-program.ejs');
 });
 router.post('/admin/program/add', isLoggedIn, isAdmin, function(req,res){
-	var qry = "INSERT INTO programs(programCode,programName,programLength,tuitionDomestic,tuitionInternational,isCoOp, overallRating, degreeType) VALUES (";
-	qry+= "'" +req.body.programCode+"',";
-	qry+= "'" +req.body.programName+"',";
-	qry+= "'" +req.body.programLength+"',";
-	qry+= "'" +req.body.tuitionDomestic+"',";
-	qry+= "'" +req.body.tuitionInternational+"',";
-	qry+= "'" +req.body.isCoOp+"',";
-	qry+= "'" +req.body.overallRating+"',";
-	qry+= "'" +req.body.degreeType+"');";
-
+	
+	var qry = "SELECT schoolId from schools where schoolName = '" + req.body.schoolName + "';";
+	
 	con.query(qry,function(err,result){
 		if(err){
 			console.log(err);
+		} else if (result.length) {
+			var qry = "INSERT INTO programs(programCode,programName,schoolId,schoolName,programLength,tuitionDomestic,tuitionInternational,isCoOp, degreeType) VALUES (";
+			qry+= "'" +req.body.programCode+"',";
+			qry+= "'" +req.body.programName+"',";
+			qry+= "'" +req.body.result[0].schoolId+"',";
+			qry+= "'" +req.body.schoolName+"',";
+			qry+= "'" +req.body.programLength+"',";
+			qry+= "'" +req.body.tuitionDomestic+"',";
+			qry+= "'" +req.body.tuitionInternational+"',";
+			qry+= "'" +req.body.isCoOp+"',";
+			qry+= "'" +req.body.degreeType+"');";
+
+			con.query(qry,function(err,result){
+				if(err){
+					console.log(err);
+				} else {
+					req.session.message = "Program Successfully Added";
+					res.redirect('back');
+				}
+			});
 		} else {
-			req.session.message = "Program Successfully Added";
+			req.session.message = "School not found.";
 			res.redirect('back');
 		}
 	});
@@ -40,9 +53,14 @@ router.get('/admin/program/edit/:program_id', isLoggedIn, isAdmin, function(req,
 	});
 });
 router.post('/admin/program/edit/:program_id', isLoggedIn, isAdmin, function(req,res){
+	
+	// add school and remove overallRating 
+	
 	var qry = "UPDATE programs SET  ";
 	qry+= "programCode='" +req.body.programCode+"',";
 	qry+= "programName='" +req.body.programName+"',";
+	qry+= "schoolId='" +req.body.schoolId+"',";
+	qry+= "schoolName='" +req.body.schoolName+"',";
 	qry+= "programLength='" +req.body.programLength+"',";
 	qry+= "tuitionDomestic='" +req.body.tuitionDomestic+"',";
 	qry+= "tuitionInternational='" +req.body.tuitionInternational+"',";
