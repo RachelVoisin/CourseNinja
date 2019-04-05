@@ -3,20 +3,26 @@
 
 
 <form action="/admin/program/add" method="post" class="col s12">
-<input type="hidden" name="programId" value="">
+
+<div class="form-group row">
+	<label for="schoolName" class="col-2 col-form-label">School Name</label>
+	<div class="col-10">
+		<input type="text" name="schoolName" value="" class="form-control" maxlength="255">
+	</div>
+</div>
+
 <div class="form-group row">
     <label for="programCode" class="col-2 col-form-label">Program Code</label>
     <div class="col-10">
-        <input type="text" name="programCode" value="" class="form-control" maxlength = "255">
+        <input type="text" name="programCode" value="" class="form-control" maxlength = "255" required>
     </div>
 </div>
 <div class="form-group row">
         <label for="programName" class="col-2 col-form-label">Program Name</label>
         <div class="col-10">
-            <input type="text" name="programName" value="" class="form-control" maxlength = "255">
+            <input type="text" name="programName" value="" class="form-control" maxlength = "255" required>
         </div>
 </div>
-<input type="hidden" name="programId" value="">
 <div class="form-group row">
         <label for="programLength" class="col-2 col-form-label">Program Length</label>
         <div class="col-10">
@@ -42,12 +48,6 @@
         </div>
 </div>
 <div class="form-group row">
-        <label for="overallRating" class="col-2 col-form-label">Overall Rating</label>
-        <div class="col-10">
-            <input type="number" name="overallRating" value="" class="form-control" min="1" max = "10" maxlength = "2">
-        </div>
-</div>
-<div class="form-group row">
         <label for="degreeType" class="col-2 col-form-label">Degree Type</label>
         <div class="col-10">
             <input type="text" name="degreeType" value="" class="form-control" maxlength = "255">
@@ -64,4 +64,10 @@
 
 
 </div>
+<script>
+//autofill the school name 
+
+</script>
+
+
 <% include ../partials/footer %>

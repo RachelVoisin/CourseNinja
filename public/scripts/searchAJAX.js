@@ -70,10 +70,10 @@ function search(data){
 					var loadMore = '<button class="loadMoreBtn" id="schoolLoad">Load More</button>';
 					$('#loadmore').html(loadMore);
 				}
-
 			} else if(data.search == "program"){
 				result.forEach(function(item){
-					var output = "<div><h4>" + item.name + " - " + item.code + "</h4><p>" + item.school + "</p></div>";
+					var ref = "/reviews?school=" + item.school.replace(" ", "+") + "&program=" + item.name.replace(" ", "+");
+					var output = "<a href='" + ref + "'><div><h4>" + item.name + " - " + item.code + "</h4><p>" + item.school + "</p></div></a>";
 					$('#output').append(output);
 				});
 				if(result.length === 10){					
