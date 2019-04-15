@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+<% include ../partials/admin-header %>
+
+<form action="/admin/index/display/schools" method="post" class="col s12">
+<br>
+<div class="" style="margin-left: 50px; margin-right: 50px">
+    <div class="col s12">
+        <a href="/admin/school/add" class="btn btn-success btn-lg">Add a new School</a>
+    </div>
+</div>
+<br>
+
+<!-- This is data view-->
+<div class="" style="margin-left: 50px; margin-right: 50px">
+    <div class="col s12">
+        <!--check if items (database values) is not empty -->
+        <% if (items.length > 0) {%>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width:1%; text-align:center">School ID</th>
+                        <th style="width:9%">School Name</th>
+                        <th style="width:9%">School City</th>
+                        <th style="width:9%">School Region</th>
+                        <th style="width:9%">School Country</th>
+                        
+                        <th solspan="2" style="width:40%;text-align:center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- iterate through all objects and get specific data-->
+                    
+                    <% for(var key in items){%>
+                        <tr>
+                                <td style="width:1%; text-align:center"><%= items[key].schoolId %></td>
+                                <td style="width:9%"><%=items[key].schoolName %></td>
+                                <td style="width:9%"><%=items[key].schoolCity %></td>
+                                <td style="width:9%"><%=items[key].schoolRegion %></td>
+                                <td style="width:9%"><%=items[key].schoolCountry %></td>
+                                
+                                <td solspan="2" style="width:40%;text-align:center">
+                                    <a href="/admin/school/edit/ <%= items[key].schoolId %>" class="btn btn-success">Edit</a>
+                                    <a href="/admin/school/delete/<%= items[key].schoolId %>" class="btn btn-danger">Delete</a>
+                                </td> 
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <% }else{ %>
+            <p><strong>No records available</strong></p>
+        <% } %>    
+    </div>
+</div>
+</form>
+<% include ../partials/footer %>

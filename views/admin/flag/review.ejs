@@ -1,0 +1,26 @@
+<% include ../../partials/header %>
+<% include ../../partials/admin-header %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:1em;">
+  <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin/flag/review">Review</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/flag/school">School</a>
+      </li>
+    </ul>
+</nav>
+
+<% flags.forEach(function(flag){ %>
+	<div class="card w-50" style="margin:1em auto;">
+		<h5 class="card-header"><%= flag.reason %></h5>
+		<div class="card-body">
+			<p class="card-text"><%= flag.objectBody %></p>
+			<a href="/admin/flag/review/delete/<%= flag.flagId %>/<%= flag.objectReference %>" class="btn btn-danger">Delete Review <i class="fas fa-trash-alt"></i></a>
+			<a href="/admin/flag/finish/<%= flag.flagId %>" class="btn btn-success">Ignore &amp; Mark Flag as Complete <i class="far fa-check-circle"></i></a>
+		</div>
+	</div>
+<% }); %>
+
+<% include ../../partials/footer %>

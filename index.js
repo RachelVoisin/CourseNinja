@@ -82,20 +82,29 @@ app.get("/flag/review/:id", function(req, res){
 			res.redirect('/');
 		} else if(!results.length){
 			res.redirect('/');
-		}else {
+		} else {
 			res.render("flag", { type: "review", review: results[0] });
 		}
 	});
 });
 app.post("/flag/review/:id", function(req, res){
-	var sql = "INSERT INTO flags (objectType, objectReference, reason, isComplete) VALUES ('review', '" + req.params.id + "', '" + req.body.flag + "', 0);";
+	var sql = "SELECT * FROM reviews WHERE reviewId = '" + req.params.id + "';";
 	con.query(sql, function(err, results){
 		if(err){
 			req.session.message = 'Database could not be reached: ' + err;
 			res.redirect('/');
 		} else {
-			req.session.message = 'Your message has been sent.';
-			res.redirect('/');
+			var review = results[0];
+			var sql = "INSERT INTO flags (objectType, objectReference, objectBody, reason, isComplete) VALUES ('review', '" + req.params.id + "', '" + review.reviewBody + "', '" + req.body.flag + "', 0);";
+			con.query(sql, function(err, results){
+				if(err){
+					req.session.message = 'Database could not be reached: ' + err;
+					res.redirect('/');
+				} else {
+					req.session.message = 'Your message has been sent.';
+					res.redirect('/');
+				}
+			});
 		}
 	});
 });

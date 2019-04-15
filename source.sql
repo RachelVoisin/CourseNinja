@@ -113,6 +113,7 @@ CREATE TABLE flags (
 	flagId INT AUTO_INCREMENT PRIMARY KEY,
 	objectType VARCHAR(255),
 	objectReference VARCHAR(255),
+	objectBody VARCHAR(255),
 	reason VARCHAR(255),
 	isComplete TINYINT(1)
 );

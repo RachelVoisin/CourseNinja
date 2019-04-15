@@ -1,4 +1,5 @@
 <% include ../partials/header %>
+<% include ../partials/admin-header %>
 <div class="row" style="margin-left: 50px; margin-right: 50px">
 
 
@@ -7,7 +8,7 @@
 <div class="form-group row">
 	<label for="schoolName" class="col-2 col-form-label">School Name</label>
 	<div class="col-10">
-		<input type="text" name="schoolName" value="" class="form-control" maxlength="255">
+		<input type="text" id="schoolInput" name="schoolName" value="" class="form-control" maxlength="255">
 	</div>
 </div>
 
@@ -64,10 +65,29 @@
 
 
 </div>
+
+<script src="/scripts/autocomplete.js"></script>
 <script>
-//autofill the school name 
+var url = "/autocomplete";
 
+$(document).ready(function(){
+	var data = {"school": document.getElementById("schoolInput").value, "search": "school"};
+
+	$.ajax({
+		type: "GET",
+		url: url,
+		data: data,
+		success: function(result){ 
+			autocomplete(document.getElementById("schoolInput"), result);
+		},
+		error:function (jXHR, textStatus, errorThrown){
+			console.log(errorThrown);
+			console.log(textStatus);
+			console.log(jXHR);
+		},
+		dataType: "JSON"
+	});
+});
 </script>
-
 
 <% include ../partials/footer %>
