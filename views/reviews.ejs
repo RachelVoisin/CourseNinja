@@ -97,8 +97,27 @@
 		</div>
 	</div>
 	
-	<!-- file upload here -->
-	
+	<br />
+	<br />
+	<br />
+	<h2>Program Files for <b><%= program.programName %></b></h2>
+	<div class="">
+	<% if(files.length){ %>
+      <% for(var i = 0; i < files.length; i++) { %>
+			<% var fileEx = files[i].name.split(".").pop(); %>
+				<% if(fileEx == "pdf"){ %>
+					<p><%= files[i].name %></p>
+					<embed src="/uploads/<%= files[i].name %>" width="800px" height="800px" />
+				<% } else { %>
+					<img src="/uploads/<%= files[i].name %>" alt="an uploaded course document" class="img-thumbnail img-responsive" style="margin-bottom: 10px;">
+				<% }%>
+				<br />
+				<a class="btn btn-outline-danger" style="margin:10px;" href="/uploads/<%= files[i].name %>" download>Download</a>
+        <% } %>
+		<p>or</p>
+    <% } %>
+	</div>
+	<a class="btn btn-outline-danger" href="/upload/<%= program.programId %>">Upload a Course Document</a>
 	
 </div>
 
