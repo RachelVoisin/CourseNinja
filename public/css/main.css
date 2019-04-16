@@ -186,7 +186,7 @@ textarea {
 	border-radius: 4px;
 	width: 35%;
 }
-.card{
+.search-card{
 	text-align: left;
 	margin: 5%;
 	float:right;
@@ -201,6 +201,24 @@ textarea {
 }
 .programInfo .row:nth-of-type(even) {
 	background: #d8d8d8;
+}
+
+
+
+.tooltip-container {
+	position: relative;
+}
+
+.tooltip {
+	position: absolute;
+	right: -100%;
+	color: grey;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.tooltip-container:hover .tooltip {
+	opacity: 1;
 }
 
 

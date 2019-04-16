@@ -88,7 +88,37 @@
 			<div class="col-lg-4">Degree Type:</div>
 			<div class="col-lg-8"><%= program.degreeType %></div>
 		</div>
+		<div class="row">
+			<div class="col-lg-11"></div>
+			<div class="col-lg-1 tooltip-container">
+				<a href="/flag/program/<%= program.programId %>"><i class="fa fa-flag"></i></a>
+				<div class="tooltip">Report Information as Incorrect</div>
+			</div>
+		</div>
 	</div>
+	
+	<br />
+	<br />
+	<br />
+	<h2>Program Files for <b><%= program.programName %></b></h2>
+	<div class="">
+	<% if(files.length){ %>
+      <% for(var i = 0; i < files.length; i++) { %>
+			<% var fileEx = files[i].name.split(".").pop(); %>
+				<% if(fileEx == "pdf"){ %>
+					<p><%= files[i].name %></p>
+					<embed src="/uploads/<%= files[i].name %>" width="800px" height="800px" />
+				<% } else { %>
+					<img src="/uploads/<%= files[i].name %>" alt="an uploaded course document" class="img-thumbnail img-responsive" style="margin-bottom: 10px;">
+				<% }%>
+				<br />
+				<a class="btn btn-outline-danger" style="margin:10px;" href="/uploads/<%= files[i].name %>" download>Download</a>
+        <% } %>
+		<p>or</p>
+    <% } %>
+	</div>
+	<a class="btn btn-outline-danger" href="/upload/<%= program.programId %>">Upload a Course Document</a>
+	
 </div>
 
 <% include ./partials/footer %>

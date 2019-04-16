@@ -4,10 +4,13 @@ var router = express.Router();
 var db = require('../dbConnection');
 var con = db();
 
+// add lines for passing files?
+
 router.get("/reviews", function(req, res){
 	var school = req.query.school;
 	var program = req.query.program;
 	var reviews = [];
+	var files = [];
 	var sql = "SELECT * FROM schools WHERE schoolName = '" + school + "';";
 	con.query(sql, function(err, results){
 		if(err){
@@ -31,10 +34,21 @@ router.get("/reviews", function(req, res){
 							results.forEach(function(el, index) {
 								reviews.push(el);
 							});
-							res.render("reviews", {reviews: reviews, program: program, school: school});
+							var sql = "SELECT * FROM resources WHERE programId = " + program.programId + ";";
+							con.query(sql, function(err, results){
+								if(err){
+									req.session.message = 'Database could not be reached: ' + err;
+									res.redirect('/');
+								} else if (results.length > 0){
+									results.forEach(function(el, index) {
+										files.push(el);
+									});
+								}
+								res.render("reviews", {reviews: reviews, program: program, school: school, files: files});
+							});
 						} else {
 							res.locals.message = 'Be the first to leave a review!';
-							res.render("reviews", {reviews: reviews, program: program, school: school});
+							res.render("reviews", {reviews: reviews, program: program, school: school, files: files});
 						}
 					});
 				} else {

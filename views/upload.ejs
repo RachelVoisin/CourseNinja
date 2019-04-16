@@ -1,0 +1,14 @@
+<% include ./partials/header %>
+
+<div class="index">
+  <div class="indexWrapper">
+      <h1>Upload Course Files</h1>
+      <form action='/upload/<%= programId %>' method='POST' encType="multipart/form-data">
+          <input class="form-control" type="file" name="sampleFile" />
+          <br />
+          <input style="padding: 5px;" class="btn btn-primary" type='submit' value='Upload!' />
+      </form>
+  </div>
+</div>
+
+<% include ./partials/footer %>

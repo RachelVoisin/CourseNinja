@@ -4,6 +4,20 @@ DELETE FROM schools;
 
 INSERT INTO schools (schoolId, schoolName, schoolCity, schoolRegion, schoolCountry) VALUES (1, "Fanshawe College", "London", "Ontario", "Canada");
 
+INSERT INTO schools (schoolName, schoolCity, schoolRegion, schoolCountry) VALUES ("Western University", "London", "Ontario", "Canada");
+
+INSERT INTO schools (schoolName, schoolCity, schoolRegion, schoolCountry) VALUES ("Contestoga College", "Kitchener", "Ontario", "Canada");
+
+INSERT INTO schools (schoolName, schoolCity, schoolRegion, schoolCountry) VALUES ("University of Waterloo", "Waterloo", "Ontario", "Canada");
+
+INSERT INTO schools (schoolName, schoolCity, schoolRegion, schoolCountry) VALUES ("Wilfrid Laurier University", "Waterloo", "Ontario", "Canada");
+
+INSERT INTO schools (schoolName, schoolCity, schoolRegion, schoolCountry) VALUES ("McGill University", "Montreal", "Quebec", "Canada");
+
+INSERT INTO schools (schoolName, schoolCity, schoolRegion, schoolCountry) VALUES ("Montreal College of Information Technology", "Montreal", "Quebec", "Canada");
+
+INSERT INTO schools (schoolName, schoolCity, schoolRegion, schoolCountry) VALUES ("Simon Fraser University", "Burnaby", "British Columbia", "Canada");
+
 INSERT INTO programs (programCode, programName, schoolId, schoolName, programLength, tuitionDomestic, tuitionInternational, isCoOp, overallRating, degreeType) VALUES ("IWD1", "Internet Applications and Web Development", 1, "Fanshawe College", "2 Years", 2187.02, 7777.21, 0, 0, "Ontario College Diploma");
 
 INSERT INTO programs (programCode, programName, schoolId, schoolName, programLength, tuitionDomestic, tuitionInternational, isCoOp, overallRating, degreeType) VALUES ("CPA2", "Computer Programmer Analyst", 1, "Fanshawe College", "3.5 Years", 2393.31, 7983.50, 1, 0, "Ontario College Advanced Diploma");

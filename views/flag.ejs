@@ -28,6 +28,63 @@
 			<br />
 			<input class="btn btn-lg btn-primary" type="submit" value="Submit" />
 		</form>
+	<% } else if(type == "program"){ %>
+		<h3>Please indicate incorrect information:</h3>
+		<form action="/flag/program/<%= program.programId %>" method="POST">
+			<div class="container programInfo">
+				<div class="row">
+					<div class="col-lg-4">Program Name:</div>
+					<div class="col-lg-7"><%= program.programName %></div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="Program Name (<%= program.programName %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Program Code:</div>
+					<div class="col-lg-7"><%= program.programCode %></div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="Program Code (<%= program.programCode %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Program Length:</div>
+					<div class="col-lg-7"><%= program.programLength %></div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="Program Length (<%= program.programLength %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">School Name:</div>
+					<div class="col-lg-7"><%= program.schoolName %></div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="School Name (<%= program.schoolName %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Tuition (Domestic):</div>
+					<div class="col-lg-7"><%= program.tuitionDomestic %></div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="Tuition (Domestic) (<%= program.tuitionDomestic %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Tuition (International):</div>
+					<div class="col-lg-7"><%= program.tuitionInternational %></div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="Tuition (International) (<%= program.tuitionInternational %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Co-Op Program:</div>
+					<div class="col-lg-7">
+						<% if(program.isCoOp == 0){ %>
+							<%= "No" %>
+						<% }else{ %>
+							<%= "Yes" %>
+						<% } %>
+					</div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="Is Co-op (<%= program.isCoOp %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">Degree Type:</div>
+					<div class="col-lg-7"><%= program.degreeType %></div>
+					<div class="col-lg-1"><input type="radio" name="selection" value="Degree Type (<%= program.degreeType %>)"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">Please enter correct information:</div>
+					<div class="col-lg-6"><input type="text" name="correction" /></div>
+				</div>
+				<input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+			</div>
+		</form>
 	<% } %>
 </div>
 
