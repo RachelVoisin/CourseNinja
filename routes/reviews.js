@@ -4,6 +4,8 @@ var router = express.Router();
 var db = require('../dbConnection');
 var con = db();
 
+// add lines for passing files?
+
 router.get("/reviews", function(req, res){
 	var school = req.query.school;
 	var program = req.query.program;

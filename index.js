@@ -4,12 +4,14 @@ var express = require("express");
 var app = express();
 
 var bodyParser = require("body-parser"),
-	session  = require('express-session');
+	session  = require('express-session'),
+	fileUpload = require('express-fileupload');
 	
 var accountRoutes = require("./routes/account");
 var searchRoutes = require("./routes/search");
 var adminRoutes = require("./routes/admin");
 var reviewRoutes = require("./routes/reviews");
+var uploadRoutes = require("./routes/upload");
 
 const PORT = process.env.PORT || 3000
 
@@ -21,6 +23,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
  } ));
+app.use(fileUpload());
 
 var db = require('./dbConnection');
 var con = db();
@@ -87,6 +90,20 @@ app.get("/flag/review/:id", function(req, res){
 		}
 	});
 });
+app.get("/flag/program/:id", function(req, res){
+	var sql = "SELECT * FROM programs WHERE programId = '" + req.params.id + "';";
+	con.query(sql, function(err, results){
+		if(err){
+			req.session.message = 'Database could not be reached: ' + err;
+			res.redirect('/');
+		} else if(!results.length){
+			req.session.message = 'Program not found';
+			res.redirect('/');
+		} else {
+			res.render("flag", { type: "program", program: results[0] });
+		}
+	});
+});
 app.post("/flag/review/:id", function(req, res){
 	var sql = "SELECT * FROM reviews WHERE reviewId = '" + req.params.id + "';";
 	con.query(sql, function(err, results){
@@ -108,11 +125,24 @@ app.post("/flag/review/:id", function(req, res){
 		}
 	});
 });
+app.post("/flag/program/:id", function(req, res){
+	var sql = "INSERT INTO flags (objectType, objectReference, objectBody, reason, isComplete) VALUES ('program', '" + req.params.id + "', '" + req.body.selection + "', '" + req.body.correction + "', 0);";
+	con.query(sql, function(err, results){
+		if(err){
+			req.session.message = 'Database could not be reached: ' + err;
+			res.redirect('/');
+		} else {
+			req.session.message = 'Your message has been sent.';
+			res.redirect('back');
+		}
+	});
+});
 
 app.use(reviewRoutes);
 app.use(accountRoutes);
 app.use(searchRoutes);
 app.use(adminRoutes);
+app.use(uploadRoutes);
 
 
 // redirect any unidentified urls or routes to home

@@ -182,6 +182,18 @@ router.get("/admin/flag/review", isLoggedIn, isAdmin, function(req, res){
 	});
 });
 
+router.get("/admin/flag/program", isLoggedIn, isAdmin, function(req,res){
+	var sql = "SELECT * FROM flags WHERE objectType = 'program' AND isComplete = 0;";
+	con.query(sql, function(err, results){
+		if(err){
+			req.session.message = 'Database could not be reached: ' + err;
+			res.redirect('/');
+		} else {
+			res.render("admin/flag/program", {flags: results, page: "flag"});
+		}
+	});
+});
+
 router.get("/admin/flag/review/delete/:flag_id/:review_id", isLoggedIn, isAdmin, function(req, res){
 	con.query("DELETE FROM reviews WHERE reviewId = '" + req.params.review_id + "';", function (err, result){
 		if (result.affectedRows > 0){

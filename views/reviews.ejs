@@ -88,7 +88,18 @@
 			<div class="col-lg-4">Degree Type:</div>
 			<div class="col-lg-8"><%= program.degreeType %></div>
 		</div>
+		<div class="row">
+			<div class="col-lg-11"></div>
+			<div class="col-lg-1 tooltip-container">
+				<a href="/flag/program/<%= program.programId %>"><i class="fa fa-flag"></i></a>
+				<div class="tooltip">Report Information as Incorrect</div>
+			</div>
+		</div>
 	</div>
+	
+	<!-- file upload here -->
+	
+	
 </div>
 
 <% include ./partials/footer %>

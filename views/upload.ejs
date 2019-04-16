@@ -1,0 +1,27 @@
+<% include ./partials/header %>
+<div class="index">
+  <div class="indexWrapper">
+    <div>
+      <% if(msg){ %>
+        <p id="message">
+          <%= msg %>
+          <% }%>
+          </p>
+          <h1>Upload Course Files</h1>
+      <form  ref='uploadForm'
+        id='uploadForm'
+        action='http://localhost:3000/upload'
+        method='post'
+        encType="multipart/form-data">
+          <label>For What Program?: </label><input class="form-control"type="text" name="program" value="">
+          <br />
+          <input  class="form-control" type="file" name="sampleFile" />
+          <br />
+          <input style="padding: 5px;" class="index" type='submit' value='Upload!' />
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<% include ./partials/footer %>

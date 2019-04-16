@@ -205,6 +205,24 @@ textarea {
 
 
 
+.tooltip-container {
+	position: relative;
+}
+
+.tooltip {
+	position: absolute;
+	right: -100%;
+	color: grey;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.tooltip-container:hover .tooltip {
+	opacity: 1;
+}
+
+
+
 
 
 
